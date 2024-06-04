@@ -20,3 +20,7 @@ Route::get('/hotels', function () {
     return view('hotels');
 });
 
+Route::get('/listings',function($id){
+    return response('Room '.$id,200);
+});
+
