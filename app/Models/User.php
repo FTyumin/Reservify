@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+
     ];
 
     /**
@@ -31,6 +33,13 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function reservations()
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
+   
 
     /**
      * Get the attributes that should be cast.
