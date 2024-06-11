@@ -11,17 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(!Schema::hasTable('payments')){
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->integer('reservation_id');
+            $table->unsignedBigInteger('reservation_id');
             $table->integer('amount');
             $table->date('date');
             $table->string('payment_method');
             $table->string('status');
-            $table->foreign('reservation_id')->references('id')->on('reservations');
+            $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
             $table->timestamps();
         });
     }
+}
 
     /**
      * Reverse the migrations.

@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(!Schema::hasTable('reviews')){
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -18,11 +19,11 @@ return new class extends Migration
             $table->bigInteger('hotel_id');
             $table->integer('rating');
             $table->text('comment');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('hotel_id')->references('id')->on('hotels');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
         });
     }
-
+    }
     /**
      * Reverse the migrations.
      */

@@ -11,24 +11,29 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(!Schema::hasTable('employees')){
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
-
             $table->string('name');
             $table->string('surname');
-            $table->bigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('user_id');
             $table->string('email')->unique();
             $table->string('phone_number');
             $table->string('position');
-            $table->string('hotel_id');
-            $table->timestamps();
+            $table->unsignedBigInteger('hotel_id');
+            $table->timestamps(); 
+
+            // Foreign keys
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
         });
     }
+}
 
     /**
-     * Reverse the migrations.
+     * "Reverse the migrations."
      */
+
     public function down(): void
     {
         Schema::dropIfExists('employees');

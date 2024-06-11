@@ -10,7 +10,8 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
+{
+    if (!Schema::hasTable('reservations')) {
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('room_id');
@@ -21,9 +22,11 @@ return new class extends Migration
             $table->dateTime('check_out');
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-    });
+        });
     }
+}
 
+    
     /**
      * Reverse the migrations.
      */
