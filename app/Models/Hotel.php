@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Hotel extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'location', 'email', 'phone', 'rating'];
+
     public function rooms()
     {
         return $this->hasMany(Room::class);
@@ -18,9 +21,8 @@ class Hotel extends Model
         return $this->hasMany(Employee::class);
     }
 
-    public function reservations()
+    public function reviews()
     {
-        return $this->hasManyThrough(Reservation::class, Room::class);
+        return $this->hasMany(Review::class);
     }
-    
 }

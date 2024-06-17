@@ -9,24 +9,20 @@ class Reservation extends Model
 {
     use HasFactory;
 
-    public function guest()
-    {
-        return $this->belongsTo(Guest::class,'guest_id');
-    }
-
-    public function payment()
-    {
-        return $this->hasOne(Payment::class);
-    }
+    protected $fillable = ['room_id', 'guest_id', 'check_in', 'check_out', 'is_active'];
 
     public function room()
     {
-        return $this->hasOne(Room::class);
+        return $this->belongsTo(Room::class);
     }
 
-    public function services()
+    public function guest()
     {
-        return $this->belongsToMany(Service::class, 'reservation_service');
+        return $this->belongsTo(Guest::class);
     }
-    
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

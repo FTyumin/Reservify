@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if(!Schema::hasTable('cleaning_schedule')){
         Schema::create('cleaning_schedule', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->foreign('employee_id')->references('id')->on('employee')->onDelete('cascade');
         });
+    }
     }
 
     /**
