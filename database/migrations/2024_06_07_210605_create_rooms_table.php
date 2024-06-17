@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->timestamps();
             $table->id();
             $table->foreignId('hotel_id')->constrained()->onDelete('cascade');
             $table->string('type');
@@ -21,6 +20,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('image')->nullable();
             $table->boolean('is_available')->default(true);
+            $table->timestamps();
         });
     }
 

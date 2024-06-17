@@ -9,4 +9,8 @@ class Employee extends Model
 {
     use HasFactory;
     
+    function hotel(){
+        return $this->belongsTo(Hotel::class);
+    }
+    
 }

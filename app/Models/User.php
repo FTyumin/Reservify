@@ -34,10 +34,9 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public function reservations()
-    {
-        return $this->hasMany(Reservation::class);
-    }
+  
+
+  
 
    
 
