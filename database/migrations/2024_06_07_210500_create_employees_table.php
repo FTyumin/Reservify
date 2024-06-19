@@ -4,14 +4,13 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateEmployeesTable extends Migration
 {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        if(!Schema::hasTable('employees')){
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -21,21 +20,19 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('position');
             $table->unsignedBigInteger('hotel_id');
-            $table->timestamps(); 
+            $table->timestamps();
 
-            // Foreign keys
+            // Define foreign key constraints
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
         });
     }
-}
 
     /**
-     * "Reverse the migrations."
+     * Reverse the migrations.
      */
-
     public function down(): void
     {
         Schema::dropIfExists('employees');
     }
-};
+}
