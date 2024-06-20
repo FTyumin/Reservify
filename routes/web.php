@@ -16,6 +16,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/hotels/create', [HotelController::class, 'create']);
+    Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
 });
 
 
@@ -23,6 +25,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/hotels', [HotelController::class, 'store'])->middleware('auth');
 
 Route::get('/hotels/create',[HotelController::class, 'create'])->middleware('auth');
+
+Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
 
 Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->middleware('auth');
 

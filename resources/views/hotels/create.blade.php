@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+{{-- dadsd --}}
 @section('content')
     <h1>Create Hotel</h1>
 
