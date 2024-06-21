@@ -15,7 +15,6 @@ class CreateEmployeesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('surname');
-            $table->unsignedBigInteger('user_id');
             $table->string('email')->unique();
             $table->string('phone_number');
             $table->string('position');
@@ -23,7 +22,6 @@ class CreateEmployeesTable extends Migration
             $table->timestamps();
 
             // Define foreign key constraints
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
         });
     }
