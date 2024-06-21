@@ -6,5 +6,4 @@
     <p>Email: {{ $hotel->email }}</p>
     <p>Phone: {{ $hotel->phone }}</p>
     <p>Rating: {{ $hotel->rating }}</p>
-    <a href="{{ route('hotels.index') }}">Back to list</a>
 @endsection
