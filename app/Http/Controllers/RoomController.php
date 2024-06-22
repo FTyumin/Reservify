@@ -28,8 +28,24 @@ class RoomController extends Controller
             'price' => 'required|integer|min:0',
             'capacity' => 'required|integer|min:1',
             'description' => 'required|string',
-            'image' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
             'is_available' => 'required|boolean',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+        } else {
+            $imagePath = null;
+        }
+
+        Room::create([
+            'hotel_id' => $hotel->id,
+            'type' => $request->type,
+            'price' => $request->price,
+            'capacity' => $request->capacity,
+            'description' => $request->description,
+            'image' => $imagePath,
+            'is_available' => $request->has('is_available'),
         ]);
 
         // $hotel->rooms()->create($request->all());
@@ -37,12 +53,8 @@ class RoomController extends Controller
         // Room::create($request->all());
         // return redirect()->route('rooms.index')->with('success', 'Room created successfully.');
 
-        $roomData = $request->all();
-        $roomData['hotel_id'] = $hotel->id;
 
-        $hotel->rooms()->create($roomData);
-
-        Log::info('Room created', ['room' => $roomData]);
+        Log::info('Room created', ['room' => $request->type]);
 
         return redirect()->route('hotels.show', $hotel->id);
     }
@@ -76,10 +88,9 @@ class RoomController extends Controller
         return redirect()->route('rooms.index')->with('success', 'Room updated successfully.');
     }
 
-    public function destroy($id)
+    public function destroy(Hotel $hotel, Room $room)
     {
-        $room = Room::findOrFail($id);
         $room->delete();
-        return redirect()->route('rooms.index')->with('success', 'Room deleted successfully.');
+        return redirect()->route('hotels.show', $hotel->id)->with('success', 'Room deleted successfully.');
     }
 }

@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
     Route::delete('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
     Route::get('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
+    Route::get('/hotels/{hotel}/rooms', [HotelController::class, 'index'])->name('rooms.index');
 });
 
 

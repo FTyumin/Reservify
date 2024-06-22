@@ -9,6 +9,10 @@
     <p>Description: {{ $room->description }}</p>
     <p>Hotel: <a href="{{ route('hotels.show', $hotel->id) }}">{{ $hotel->name }}</a></p>
 
+    @if($room->image)
+        <img src="{{ asset('storage/' . $room->image) }}" alt="Room Image" style="max-width: 200px;">
+    @endif
+
     <a href="{{ route('rooms.edit', ['hotel' => $hotel->id, 'room' => $room->id]) }}">Edit Room</a>
 
     <form action="{{ route('rooms.destroy', ['hotel' => $hotel->id, 'room' => $room->id]) }}" method="POST" style="display:inline;">
