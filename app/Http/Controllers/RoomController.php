@@ -47,10 +47,10 @@ class RoomController extends Controller
         return redirect()->route('hotels.show', $hotel->id);
     }
 
-    public function show($id)
+    public function show(Hotel $hotel, Room $room)
     {
-        $room = Room::findOrFail($id);
-        return view('rooms.show', compact('room'));
+        // $room = Room::findOrFail();
+        return view('rooms.show', compact('hotel','room'));
     }
 
     public function edit($id)

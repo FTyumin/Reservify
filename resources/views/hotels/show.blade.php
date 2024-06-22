@@ -13,7 +13,10 @@
     <h2>Rooms</h2>
     <ul>
         @foreach ($hotel->rooms as $room)
-            <li>{{ $room->type }} - {{ $room->price }}</li>
+            <li>
+                 <a href="{{ route('rooms.show', ['hotel' => $hotel->id, 'room' => $room->id]) }}">{{ $room->type }}</a> 
+                 - {{ $room->price }}
+            </li>
         @endforeach
     </ul>
 
