@@ -2,26 +2,26 @@
 
 @section('content')
     <h1>Hotels</h1>
+
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
+
+    <button class="btn btn-primary" onclick="window.location.href='{{ route('hotels.create') }}'">Create New Hotel</button>
+    {{-- <a href="{{ route('hotels.create') }}">Create New Hotel</a> --}}
+
     <ul>
-        @foreach($hotels as $hotel)
+        @foreach ($hotels as $hotel)
             <li>
-                <h2>{{ $hotel->name }}</h2>
-                <p>{{ $hotel->location }}</p>
-                @auth
-                    <a href="{{ route('reservations.create', ['hotel_id' => $hotel->id]) }}">Select Hotel</a>
-                    @if (Auth::user()->isAdmin())
-                        <form action="{{ route('hotels.destroy', $hotel->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Delete Hotel</button>
-                        </form>
-                    @endif
-                @endauth
+                <a href="{{ route('hotels.show', $hotel) }}">{{ $hotel->name }}</a>
+                <a href="{{ route('hotels.edit', $hotel) }}">Edit</a>
+                <form action="{{ route('hotels.destroy', $hotel) }}" method="POST" style="display:inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit">Delete</button>
+                </form>
             </li>
         @endforeach
     </ul>
