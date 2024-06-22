@@ -35,6 +35,7 @@ class HotelController extends Controller
     public function show($id)
     {
         $hotel = Hotel::findOrFail($id);
+        $hotel->load('rooms');
         return view('hotels.show', compact('hotel'));
     }
 

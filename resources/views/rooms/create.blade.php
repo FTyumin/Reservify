@@ -2,18 +2,41 @@
 
 @section('content')
     <h1>Create Room</h1>
-    <form action="{{ route('rooms.store') }}" method="POST">
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('rooms.store', ['hotel' => $hotel->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <label for="hotel_id">Hotel ID:</label>
-        <input type="text" name="hotel_id" id="hotel_id">
-        <label for="room_number">Room Number:</label>
-        <input type="text" name="room_number" id="room_number">
+
+        {{-- // Add a hidden input field to store the hotel ID --}}
+        <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
+
         <label for="type">Type:</label>
-        <input type="text" name="type" id="type">
-        <label for="price">Price:</label>
-        <input type="text" name="price" id="price">
-        <label for="availability">Availability:</label>
-        <input type="text" name="availability" id="availability">
+        <input type="text" name="type" id="type" required>
+        
+        <label for="price">Price per night:</label>
+        <input type="number" name="price" min="0" max="200" id="price" required>
+        
+        <label for="capacity">Capacity:</label>
+        <input type="number" name="capacity" id="capacity" max="5" required>
+        
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description" required>
+        
+        <label for="image">Image:</label>
+        <input type="file" name="image" id="image">
+        
+        <label for="is_available">Available:</label>
+        <input type="checkbox" name="is_available" id="is_available" value="1" checked>
+        
         <button type="submit">Create</button>
     </form>
 @endsection

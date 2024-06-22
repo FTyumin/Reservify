@@ -7,4 +7,15 @@
     <p>Phone: {{ $hotel->phone }}</p>
     <p>Rating: {{ $hotel->rating }}</p>
     <a href="{{ route('hotels.index') }}">Back to list</a>
+    <a href="{{ route('hotels.edit', $hotel->id) }}">Edit</a>
+
+
+    <h2>Rooms</h2>
+    <ul>
+        @foreach ($hotel->rooms as $room)
+            <li>{{ $room->type }} - {{ $room->price }}</li>
+        @endforeach
+    </ul>
+
+    <a href="{{ route('rooms.create', ['hotel' => $hotel->id]) }}">Create Room</a>
 @endsection

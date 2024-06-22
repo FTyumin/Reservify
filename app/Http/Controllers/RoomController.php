@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Hotel;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class RoomController extends Controller
 {
@@ -13,12 +15,12 @@ class RoomController extends Controller
         return view('rooms.index', compact('rooms'));
     }
 
-    public function create()
+    public function create(Hotel $hotel)
     {
-        return view('rooms.create');
+        return view('rooms.create', compact('hotel'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Hotel $hotel)
     {
         $request->validate([
             'hotel_id' => 'required|exists:hotels,id',
@@ -30,8 +32,19 @@ class RoomController extends Controller
             'is_available' => 'required|boolean',
         ]);
 
-        Room::create($request->all());
-        return redirect()->route('rooms.index')->with('success', 'Room created successfully.');
+        // $hotel->rooms()->create($request->all());
+
+        // Room::create($request->all());
+        // return redirect()->route('rooms.index')->with('success', 'Room created successfully.');
+
+        $roomData = $request->all();
+        $roomData['hotel_id'] = $hotel->id;
+
+        $hotel->rooms()->create($roomData);
+
+        Log::info('Room created', ['room' => $roomData]);
+
+        return redirect()->route('hotels.show', $hotel->id);
     }
 
     public function show($id)
