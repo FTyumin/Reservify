@@ -10,11 +10,14 @@
         <p class="text-gray-600 mb-4">Rating: {{ $hotel->rating }}</p>
 
         <div class="flex space-x-4 mb-6">
-            <a href="{{ route('hotels.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Back to list
+            <a href="{{ route('reviews.index', $hotel->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+                Reviews
             </a>
             <a href="{{ route('hotels.edit', $hotel->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                 Edit
+            </a>
+            <a href="{{ route('hotels.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Back to list
             </a>
         </div>
 

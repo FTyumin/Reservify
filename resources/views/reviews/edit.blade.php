@@ -4,15 +4,11 @@
     <h1>Edit Review</h1>
     <form action="{{ route('reviews.update', $review->id) }}" method="POST">
         @csrf
-        @method('PUT')
-        <label for="guest_id">Guest ID:</label>
-        <input type="text" name="guest_id" id="guest_id" value="{{ $review->guest_id }}">
-        <label for="hotel_id">Hotel ID:</label>
-        <input type="text" name="hotel_id" id="hotel_id" value="{{ $review->hotel_id }}">
+        @method('PATCH')
         <label for="rating">Rating:</label>
-        <input type="number" name="rating" id="rating" min="0" max="5" value="{{ $review->rating }}">
+        <input type="number" name="rating" id="rating" min="0" max="5" value="{{ $review->rating }}" required>
         <label for="comment">Comment:</label>
-        <textarea name="comment" id="comment">{{ $review->comment }}</textarea>
-        <button type="submit">Update</button>
+        <textarea name="comment" id="comment" required>{{ $review->comment }}</textarea>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Update</button>
     </form>
 @endsection

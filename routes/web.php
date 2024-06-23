@@ -3,6 +3,7 @@
 use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -33,6 +34,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
     Route::get('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
     Route::get('/hotels/{hotel}/rooms', [HotelController::class, 'index'])->name('rooms.index');
+
+    Route::get('/hotels/{hotel}/reviews', [ReviewController::class, 'index'])->name('reviews.index');
+    Route::get('/hotels/{hotel}/reviews/create', [ReviewController::class, 'create'])->name('reviews.create');
+    Route::post('/hotels/{hotel}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
+    Route::get('/reviews/{review}', [ReviewController::class, 'show'])->name('reviews.show');
+    Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
+    Route::patch('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
+    Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 });
 
 
