@@ -26,9 +26,23 @@ class HotelController extends Controller
             'email' => 'required|email',
             'phone' => 'required|string|max:20',
             'rating' => 'required|numeric|min:0|max:5',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
+        
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('images', 'public');
+        } else {
+            $imagePath = null;
+        }
 
-        Hotel::create($request->all());
+        Hotel::create([
+            'name' => $request->name,
+            'location' => $request->location,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'rating' => $request->rating,
+            'image' => $imagePath,
+        ]);
         return redirect()->route('hotels.index')->with('success', 'Hotel created successfully.');
     }
 

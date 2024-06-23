@@ -8,6 +8,12 @@
         <p class="text-gray-600">Email: {{ $hotel->email }}</p>
         <p class="text-gray-600">Phone: {{ $hotel->phone }}</p>
         <p class="text-gray-600 mb-4">Rating: {{ $hotel->rating }}</p>
+        
+        @if ($hotel->image)
+        <img src="{{ asset('storage/' . $hotel->image) }}" alt="Hotel Image" style="max-width: 300px; max-height: 300px;">
+        @else
+        <p>No image available</p>
+        @endif
 
         <div class="flex space-x-4 mb-6">
             <a href="{{ route('reviews.index', $hotel->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
