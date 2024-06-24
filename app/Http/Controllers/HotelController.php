@@ -103,9 +103,9 @@ class HotelController extends Controller
 
     if ($request->hasFile('image')) {
         // Delete the old image if exists
-        if ($hotel->image) {
-            Storage::disk('public')->delete($hotel->image);
-        }
+        // if ($hotel->image) {
+        //     Storage::disk('public')->delete($hotel->image);
+        // }
         $imagePath = $request->file('image')->store('images', 'public');
         $hotel->image = $imagePath;
     }
