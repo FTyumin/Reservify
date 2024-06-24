@@ -35,7 +35,7 @@ class ServiceController extends Controller
 
         $hotel->services()->save($service); // Save service under the hotel
 
-        return redirect()->route('services.index', ['hotel' => $hotel->id])
+        return redirect()->route('services.show', ['hotel' => $hotel->id, 'service' => $service->id])
             ->with('success', 'Service created successfully.');
     }
 
@@ -74,7 +74,7 @@ class ServiceController extends Controller
     {
         $service->delete();
 
-        return redirect()->route('services.index', ['hotel' => $hotel->id])
+        return redirect()->route('hotels.show', ['hotel' => $hotel->id, 'service' => $service->id])
             ->with('success', 'Service deleted successfully.');
     }
 }
