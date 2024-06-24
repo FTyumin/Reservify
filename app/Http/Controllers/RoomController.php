@@ -6,6 +6,7 @@ use App\Models\Hotel;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class RoomController extends Controller
 {
@@ -65,28 +66,41 @@ class RoomController extends Controller
         return view('rooms.show', compact('hotel','room'));
     }
 
-    public function edit($id)
+    public function edit(Hotel $hotel, Room $room)
     {
-        $room = Room::findOrFail($id);
-        return view('rooms.edit', compact('room'));
+        return view('rooms.edit', compact('hotel', 'room'));
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'hotel_id' => 'required|exists:hotels,id',
-            'type' => 'required|string|max:255',
-            'price' => 'required|integer|min:0',
-            'capacity' => 'required|integer|min:1',
-            'description' => 'required|string',
-            'image' => 'nullable|string',
-            'is_available' => 'required|boolean',
-        ]);
+    public function update(Request $request, Hotel $hotel, Room $room)
+{
+    $request->validate([
+        'type' => 'required|string|max:255',
+        'price' => 'required|integer|min:0',
+        'capacity' => 'required|integer|min:1',
+        'description' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048',
+        'is_available' => 'required|boolean',
+    ]);
 
-        $room = Room::findOrFail($id);
-        $room->update($request->all());
-        return redirect()->route('rooms.index')->with('success', 'Room updated successfully.');
+    if ($request->hasFile('image')) {
+        // Delete the old image if exists
+        if ($room->image) {
+            Storage::disk('public')->delete($room->image);
+        }
+        $imagePath = $request->file('image')->store('images', 'public');
+        $room->image = $imagePath;
     }
+
+    $room->update([
+        'type' => $request->type,
+        'price' => $request->price,
+        'capacity' => $request->capacity,
+        'description' => $request->description,
+        'is_available' => $request->has('is_available'),
+    ]);
+
+    return redirect()->route('rooms.show', ['hotel' => $hotel->id, 'room' => $room->id])->with('success', 'Room updated successfully.');
+}
 
     public function destroy(Hotel $hotel, Room $room)
     {

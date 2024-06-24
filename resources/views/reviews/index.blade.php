@@ -9,12 +9,13 @@
             Back to {{ $hotel->name }}
         </a>
     </div>
-    <h1>Reviews for {{ $hotel->name }}</h1>
-    <ul>
+    <h1 class="text-2xl font-bold mb-4">Reviews for {{ $hotel->name }}</h1>
+    <ul class="list-disc pl-5">
         @foreach($reviews as $review)
-            <li>
-                <a href="{{ route('reviews.show', $review->id) }}">Inspect review from {{ $review->user->name }}</a>
-                <br>
+            <li class="mb-2">
+                <a href="{{ route('reviews.show', $review->id) }}" class="text-blue-500 hover:text-blue-700">
+                    Inspect review from {{ $review->user->name }}
+                </a>
             </li>
         @endforeach
     </ul>
