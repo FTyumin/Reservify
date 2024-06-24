@@ -41,9 +41,26 @@
             @endforeach
         </div>
         
+        <h2 class="text-2xl font-semibold mb-4">Services</h2>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            @foreach ($hotel->services as $service)
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <div class="p-4">
+                        <a href="{{ route('services.show', ['hotel' => $hotel->id, 'service' => $service->id]) }}" class="text-lg text-blue-500 hover:text-blue-700 font-semibold">
+                            {{ $service->name }}
+                        </a>
+                        <p class="text-gray-600 mt-2">Price: {{ $service->price }}€</p>
+                        <p class="text-gray-600 mt-2">Description: {{ $service->description }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
 
         <a href="{{ route('rooms.create', ['hotel' => $hotel->id]) }}" class="mt-4 inline-block bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
             Create Room
+        </a>
+        <a href="{{ route('services.create', ['hotel' => $hotel->id]) }}" class="mt-4 inline-block bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+            Create Service
         </a>
     </div>
 </div>
