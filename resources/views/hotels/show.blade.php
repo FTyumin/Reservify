@@ -9,10 +9,8 @@
         <p class="text-gray-600">Phone: {{ $hotel->phone }}</p>
         <p class="text-gray-600 mb-4">Rating: {{ $hotel->rating }}</p>
         
-        @if ($hotel->image)
-        <img src="{{ asset('storage/' . $hotel->image) }}" alt="Hotel Image" style="max-width: 300px; max-height: 300px;">
-        @else
-        <p>No image available</p>
+        @if($hotel->image)
+            <img src="{{ asset('storage/' . $hotel->image) }}" alt="Hotel Image" class="mt-4 max-w-xs rounded-lg shadow">
         @endif
 
         <div class="flex space-x-4 mb-6">

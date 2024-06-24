@@ -13,20 +13,29 @@
         </div>
     @endif
 
-    <form action="{{ route('hotels.store') }}" method="POST">
+    <form action="{{ route('hotels.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" required>
+
         <label for="location">Location:</label>
         <input type="text" name="location" id="location" required>
+
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" required>
+
         <label for="phone">Phone:</label>
         <input type="text" name="phone" id="phone" required>
+
         <label for="image">Image:</label>
-        <input type="file" name="image" id="image">
+        <input type="file" name="image" id="image" required>
+
+        <label for="description">Description:</label>
+        <input type="text" name="description" id="description" required>
+
         <label for="rating">Rating:</label>
         <input type="number" name="rating" id="rating" min="0" max="5" required>
+
         <button type="submit">Create</button>
     </form>
 @endsection

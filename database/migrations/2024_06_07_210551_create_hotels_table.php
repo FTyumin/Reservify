@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('location');
             $table->string('email');
             $table->string('phone');
+            $table->string('image')->nullable();
+            $table->string('description');
             $table->decimal('rating',2,1);
         });
     }

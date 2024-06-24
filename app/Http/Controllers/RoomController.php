@@ -84,9 +84,9 @@ class RoomController extends Controller
 
     if ($request->hasFile('image')) {
         // Delete the old image if exists
-        if ($room->image) {
-            Storage::disk('public')->delete($room->image);
-        }
+        // if ($room->image) {
+        //     Storage::disk('public')->delete($room->image);
+        // }
         $imagePath = $request->file('image')->store('images', 'public');
         $room->image = $imagePath;
     }
