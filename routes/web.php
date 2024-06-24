@@ -18,13 +18,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/hotels', [HotelController::class, 'index'])->name('hotels.index');
-    Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
-    Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
-    Route::get('/hotels/{hotel}', [HotelController::class, 'show'])->name('hotels.show');
-    Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
-    Route::patch('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
-    Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotels.destroy');
+    // Route::get('/hotels', [HotelController::class, 'index'])->name('hotels.index');
+    // Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
+    // Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
+    // Route::get('/hotels/{hotel}', [HotelController::class, 'show'])->name('hotels.show');
+    // Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
+    // Route::patch('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
+    // Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotels.destroy');
 
     Route::get('/hotels/{hotel}/rooms/create', [RoomController::class, 'create'])->name('rooms.create');
     Route::post('/hotels/{hotel}/rooms', [RoomController::class, 'store'])->name('rooms.store');
@@ -50,6 +50,19 @@ Route::middleware('auth')->group(function () {
     Route::put('/hotels/{hotel}/services/{service}', [ServiceController::class, 'update'])->name('services.update');
     Route::delete('/hotels/{hotel}/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
 });
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
+    Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
+    Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
+    Route::patch('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
+    Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotels.destroy');
+});
+
+Route::get('/hotels', [HotelController::class, 'index'])->name('hotels.index');
+Route::get('/hotels/{hotel}', [HotelController::class, 'show'])->name('hotels.show');
+
 
 
 // Hotels
