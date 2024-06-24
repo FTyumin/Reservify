@@ -2,7 +2,7 @@
 
 @section('content')
     <h1>Edit Service</h1>
-    <form action="{{ route('services.update', $service->id) }}" method="POST">
+    <form action="{{ route('services.update', ['hotel' => $hotel->id, 'service' => $service->id]) }}" method="POST">
         @csrf
         @method('PUT')
         <label for="name">Name:</label>

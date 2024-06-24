@@ -14,6 +14,7 @@ return new class extends Migration
         if(!Schema::hasTable('services')){
         Schema::create('services', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('hotel_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->integer('price');
             $table->string('description');

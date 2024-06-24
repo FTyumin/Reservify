@@ -24,7 +24,7 @@
         <label for="phone">Phone:</label>
         <input type="text" name="phone" id="phone" required>
         <label for="image">Image:</label>
-        <input type="file" name="image" id="image" required>
+        <input type="file" name="image" id="image">
         <label for="rating">Rating:</label>
         <input type="number" name="rating" id="rating" min="0" max="5" required>
         <button type="submit">Create</button>
