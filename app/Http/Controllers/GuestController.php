@@ -1,9 +1,9 @@
-<?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Guest;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class GuestController extends Controller
 {
@@ -21,15 +21,31 @@ class GuestController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'email' => 'required|email|unique:guests,email',
+            'email' => 'required|email|unique:users,email|unique:guests,email',
             'phone_number' => 'required|string|max:20',
             'credit_card_number' => 'required|string|max:20',
+            'password' => 'required|string|min:8|confirmed', // Add a password field
         ]);
 
-        Guest::create($request->all());
+        // Create the User first
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password), // Hash the password
+        ]);
+
+        // Create the Guest with the created user's ID
+        Guest::create([
+            'user_id' => $user->id,
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'credit_card_number' => $request->credit_card_number,
+        ]);
+
         return redirect()->route('guests.index')->with('success', 'Guest created successfully.');
     }
 
@@ -48,23 +64,53 @@ class GuestController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'email' => 'required|email|unique:guests,email,' . $id,
+            'email' => 'required|email|unique:users,email,' . $id . '|unique:guests,email,' . $id,
             'phone_number' => 'required|string|max:20',
             'credit_card_number' => 'required|string|max:20',
+            'password' => 'nullable|string|min:8|confirmed', // Add a password field
         ]);
 
         $guest = Guest::findOrFail($id);
-        $guest->update($request->all());
+
+        // Update Guest details
+        $guest->update([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'credit_card_number' => $request->credit_card_number,
+        ]);
+
+        // Update the corresponding User's details
+        $guest->user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        // Update User password if provided
+        if ($request->filled('password')) {
+            $guest->user->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
+
         return redirect()->route('guests.index')->with('success', 'Guest updated successfully.');
     }
 
     public function destroy($id)
     {
         $guest = Guest::findOrFail($id);
+
+        // Delete the related User
+        if ($guest->user) {
+            $guest->user->delete();
+        }
+
+        // Delete the Guest
         $guest->delete();
+
         return redirect()->route('guests.index')->with('success', 'Guest deleted successfully.');
     }
 }
