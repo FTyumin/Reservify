@@ -32,7 +32,7 @@
         <input type="number" name="rating" id="rating" value="{{ $hotel->rating }}" min="0" max="5" required>
 
         <label for="image">Image:</label>
-        <input type="file" name="image" id="image" required>
+        <input type="file" name="image" id="image">
 
         <label for="description">Description:</label>
         <input type="text" name="description" id="description" value="{{ $hotel->description }}" required>
