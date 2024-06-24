@@ -4,7 +4,8 @@ use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceController;#
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
@@ -25,6 +26,12 @@ Route::middleware('auth')->group(function () {
     // Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
     // Route::patch('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
     // Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotels.destroy');
+
+    //Logout
+    Route::post('/logout', [UserController::class, 'logout'])->middleware('auth')->name('logout');
+
+    // Show login form
+    Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
     Route::get('/hotels/{hotel}/rooms/create', [RoomController::class, 'create'])->name('rooms.create');
     Route::post('/hotels/{hotel}/rooms', [RoomController::class, 'store'])->name('rooms.store');
@@ -50,6 +57,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/hotels/{hotel}/services/{service}', [ServiceController::class, 'update'])->name('services.update');
     Route::delete('/hotels/{hotel}/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
 });
+
+
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
