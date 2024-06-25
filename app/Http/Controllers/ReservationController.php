@@ -3,85 +3,92 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
-use App\Models\Room;
 use App\Models\Service;
 use App\Models\Hotel;
+use App\Models\Room;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
-    public function index()
+    public function index(Hotel $hotel)
     {
-        $reservations = Reservation::all();
+        $reservations = $hotel->reservations()->get();
+
         return view('reservations.index', compact('reservations'));
     }
 
-    public function create($hotelId)
+    public function create(Hotel $hotel)
     {
-        $hotel = Hotel::findOrFail($hotelId);
-        $rooms = Room::where('hotel_id', $hotelId)->where('is_available', true)->get();
-        $services = Service::where('hotel_id', $hotelId)->get();
+        $rooms = $hotel->rooms; // Assuming Hotel has many Rooms
+        $services = Service::all();
+
         return view('reservations.create', compact('hotel', 'rooms', 'services'));
     }
 
-    public function store(Request $request, $hotelId)
+    public function store(Request $request, Hotel $hotel)
     {
-        $request->validate([
-            'room_id' => 'required|array|min:1',
-            'room_id.*' => 'required|exists:rooms,id',
-            'user_id' => 'required|exists:users,id',
+        $validated = $request->validate([
+            'room_id' => 'required|array',
             'check_in' => 'required|date',
-            'check_out' => 'required|date|after:check_in',
+            'check_out' => 'required|date',
             'is_active' => 'required|boolean',
-            'services' => 'nullable|array', // Allow services to be null or an array
-            'services.*' => 'exists:services,id', // Validate each service ID if present
+            'services' => 'nullable|array',
         ]);
 
-        $guestId = Auth::id();
+        $reservation = Reservation::create([
+            'room_id' => $validated['room_id'][0], // Assuming single room selection
+            'user_id' => $request->user()->id,
+            'check_in' => $validated['check_in'],
+            'check_out' => $validated['check_out'],
+            'is_active' => $validated['is_active'],
+            'hotel_id' => $hotel->id,
+        ]);
 
-        $reservationData = $request->all();
-        $reservationData['user_id'] = Auth::id();
+        if (isset($validated['services'])) {
+            $reservation->services()->sync($validated['services']);
+        }
 
-        $reservation = Reservation::create($reservationData);
-        $reservation->services()->sync($request->services);
-
-        return redirect()->route('reservations.index')->with('success', 'Reservation created successfully.');
+        return redirect()->route('reservations.index', ['hotel' => $hotel->id])->with('success', 'Reservation created successfully!');
     }
 
-    public function show($id)
+    public function show(Hotel $hotel, Reservation $reservation)
     {
-        $reservation = Reservation::findOrFail($id);
         return view('reservations.show', compact('reservation'));
     }
 
-    public function edit($id)
+    public function edit(Hotel $hotel, Reservation $reservation)
     {
-        $reservation = Reservation::findOrFail($id);
-        return view('reservations.edit', compact('reservation'));
+        $services = Service::all();
+        return view('reservations.edit', compact('reservation', 'services'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Hotel $hotel, Reservation $reservation)
     {
-        $request->validate([
+        $validated = $request->validate([
             'room_id' => 'required|exists:rooms,id',
             'user_id' => 'required|exists:users,id',
             'check_in' => 'required|date',
             'check_out' => 'required|date|after:check_in',
             'is_active' => 'required|boolean',
+            'services' => 'nullable|array',
         ]);
 
-        $reservation = Reservation::findOrFail($id);
-        $reservation->update($request->all());
+        $reservation->update($validated);
 
-        return redirect()->route('reservations.index')->with('success', 'Reservation updated successfully.');
+        if (isset($validated['services'])) {
+            $reservation->services()->sync($validated['services']);
+        } else {
+            $reservation->services()->detach();
+        }
+
+        return redirect()->route('reservations.index', ['hotel' => $hotel->id])->with('success', 'Reservation updated successfully.');
     }
 
-    public function destroy($id)
+    
+    public function destroy(Hotel $hotel, Reservation $reservation)
     {
-        $reservation = Reservation::findOrFail($id);
         $reservation->delete();
 
-        return redirect()->route('reservations.index')->with('success', 'Reservation deleted successfully.');
+        return redirect()->route('reservations.index', ['hotel' => $hotel->id])->with('success', 'Reservation deleted successfully.');
     }
 }

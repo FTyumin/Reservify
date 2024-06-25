@@ -13,7 +13,7 @@
         </div>
     @endif
 
-    <form action="{{ route('reservations.store', $hotel->id) }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+    <form action="{{ route('reservations.store', ['hotel' => $hotel->id]) }}" method="POST" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         @csrf
         <div class="mb-4">
             <label for="room_id" class="block text-gray-700 text-sm font-bold mb-2">Room</label>
@@ -24,8 +24,10 @@
             </select>
         </div>
 
-        <!-- Hidden guest_id field -->
+        <!-- Hidden user_id field -->
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
+
+        <input type="hidden" name="hotel_id" value="{{ $hotel->id }}">
 
         <div class="mb-4">
             <label for="check_in" class="block text-gray-700 text-sm font-bold mb-2">Check-in Date</label>

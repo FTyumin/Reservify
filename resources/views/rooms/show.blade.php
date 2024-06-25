@@ -12,6 +12,11 @@
         <p class="text-gray-800 font-semibold">Hotel: 
             <a href="{{ route('hotels.show', $hotel->id) }}" class="text-blue-500 hover:text-blue-700">{{ $hotel->name }}</a>
         </p>
+        <p class="text-gray-800 font-semibold">Availability: 
+            <span class="font-normal">
+                {{ $room->is_available ? 'Yes' : 'No' }}
+            </span>
+        </p>
 
         @if($room->image)
             <img src="{{ asset('storage/' . $room->image) }}" alt="Room Image" class="mt-4 max-w-xs rounded-lg shadow">
