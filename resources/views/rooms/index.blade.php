@@ -15,6 +15,8 @@
                 <a href="{{ route('rooms.show', $room->id) }}" class="text-blue-500 hover:text-blue-700">
                     Room {{ $room->room_number }}
                 </a>
+
+                @if(auth()->check() && auth()->user()->hasRole('admin'))
                 <div class="flex items-center">
                     <a href="{{ route('rooms.edit', $room->id) }}" class="text-sm bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded mr-2">
                         Edit
@@ -27,6 +29,8 @@
                         </button>
                     </form>
                 </div>
+                @endif
+                
             </li>
             @endforeach
         </ul>

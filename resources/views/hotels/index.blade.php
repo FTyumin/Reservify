@@ -10,10 +10,12 @@
         </div>
     @endif
 
+    @if(auth()->check() && auth()->user()->hasRole('admin'))
     <button onclick="window.location.href='{{ route('hotels.create') }}'"
         class="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         Create New Hotel
     </button>
+    @endif
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach ($hotels as $hotel)
