@@ -11,6 +11,8 @@ class Service extends Model
 
     protected $fillable = ['name', 'price', 'description' , 'hotel_id'];
 
+    
+
     public function hotel()
     {
         return $this->belongsTo(Hotel::class);

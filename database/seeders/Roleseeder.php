@@ -28,6 +28,10 @@ class Roleseeder extends Seeder
             'create-services',
             'edit-services',
             'delete-services',
+            'make-reservation',
+            'cancel-reservation',
+            'view-reservation',
+
         ];
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
@@ -47,6 +51,9 @@ class Roleseeder extends Seeder
             'view-hotels',
             'view-rooms',
             'view-services',
+            'make-reservation',
+            'cancel-reservation',
+            'view-reservation',
         ]);
         $adminRole->givePermissionTo(Permission::all());
     }

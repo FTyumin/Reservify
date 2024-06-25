@@ -17,18 +17,16 @@ class ReservationController extends Controller
         return view('reservations.index', compact('reservations'));
     }
 
-    public function create(Hotel $hotel)
+    public function create(Hotel $hotel, Room $room)
     {
-        $rooms = $hotel->rooms; // Assuming Hotel has many Rooms
         $services = Service::all();
 
-        return view('reservations.create', compact('hotel', 'rooms', 'services'));
+        return view('reservations.create', compact('hotel', 'room', 'services'));
     }
 
-    public function store(Request $request, Hotel $hotel)
+    public function store(Request $request, Hotel $hotel, Room $room)
     {
         $validated = $request->validate([
-            'room_id' => 'required|array',
             'check_in' => 'required|date',
             'check_out' => 'required|date',
             'is_active' => 'required|boolean',
@@ -36,7 +34,7 @@ class ReservationController extends Controller
         ]);
 
         $reservation = Reservation::create([
-            'room_id' => $validated['room_id'][0], // Assuming single room selection
+            'room_id' => $room->id,
             'user_id' => $request->user()->id,
             'check_in' => $validated['check_in'],
             'check_out' => $validated['check_out'],
@@ -53,20 +51,19 @@ class ReservationController extends Controller
 
     public function show(Hotel $hotel, Reservation $reservation)
     {
-        return view('reservations.show', compact('reservation'));
+        return view('reservations.show', compact('hotel','reservation'));
     }
 
     public function edit(Hotel $hotel, Reservation $reservation)
     {
+        
         $services = Service::all();
-        return view('reservations.edit', compact('reservation', 'services'));
+        return view('reservations.edit', compact('hotel', 'reservation', 'services'));
     }
 
     public function update(Request $request, Hotel $hotel, Reservation $reservation)
     {
         $validated = $request->validate([
-            'room_id' => 'required|exists:rooms,id',
-            'user_id' => 'required|exists:users,id',
             'check_in' => 'required|date',
             'check_out' => 'required|date|after:check_in',
             'is_active' => 'required|boolean',
@@ -84,7 +81,6 @@ class ReservationController extends Controller
         return redirect()->route('reservations.index', ['hotel' => $hotel->id])->with('success', 'Reservation updated successfully.');
     }
 
-    
     public function destroy(Hotel $hotel, Reservation $reservation)
     {
         $reservation->delete();

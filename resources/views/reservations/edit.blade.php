@@ -2,17 +2,29 @@
 
 @section('content')
     <h1>Edit Reservation</h1>
-    <form action="{{ route('reservations.update', $reservation->id) }}" method="POST">
+    <form action="{{ route('reservations.update', ['hotel' => $hotel->id, 'reservation' => $reservation->id]) }}" method="POST">
         @csrf
         @method('PUT')
-        <label for="guest_id">Guest ID:</label>
-        <input type="text" name="guest_id" id="guest_id" value="{{ $reservation->guest_id }}">
-        <label for="room_id">Room ID:</label>
-        <input type="text" name="room_id" id="room_id" value="{{ $reservation->room_id }}">
-        <label for="check_in_date">Check-in Date:</label>
-        <input type="date" name="check_in_date" id="check_in_date" value="{{ $reservation->check_in_date }}">
-        <label for="check_out_date">Check-out Date:</label>
-        <input type="date" name="check_out_date" id="check_out_date" value="{{ $reservation->check_out_date }}">
-        <button type="submit">Update</button>
+        <div>
+            <label for="check_in">Check In</label>
+            <input type="date" id="check_in" name="check_in" value="{{ $reservation->check_in }}">
+        </div>
+        <div>
+            <label for="check_out">Check Out</label>
+            <input type="date" id="check_out" name="check_out" value="{{ $reservation->check_out }}">
+        </div>
+        <div>
+            <label for="is_active">Is Active</label>
+            <input type="checkbox" id="is_active" name="is_active" value="1" {{ $reservation->is_active ? 'checked' : '' }}>
+        </div>
+        <div>
+            <label for="services">Services</label>
+            <select multiple id="services" name="services[]">
+                @foreach($services as $service)
+                    <option value="{{ $service->id }}" {{ in_array($service->id, $reservation->services->pluck('id')->toArray()) ? 'selected' : '' }}>{{ $service->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <button type="submit">Update Reservation</button>
     </form>
 @endsection
