@@ -31,12 +31,12 @@ class GuestSeeder extends Seeder
                 'credit_card_number' => '5618-8429-6121-2761',
             ],
             [
-                'user_id'=>3,
-                'name' => 'Janis',
-                'surname' => 'Berzins',
-                'email' => 'janis.berzins@gmail.com',
-                'phone_number' => '482-032-1234',
-                'credit_card_number' => '5618-8429-6121-2761',
+                'user_id'=>4,
+                'name' => 'Anna',
+                'surname' => 'Liepina',
+                'email' => 'anna.liepina@inbox.lv',
+                'phone_number' => '482-230-1234',
+                'credit_card_number' => '4726-8124-7891-5713',
             ],
         ]);
     }

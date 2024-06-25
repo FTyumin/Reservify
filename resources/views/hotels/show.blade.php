@@ -13,15 +13,16 @@
             <img src="{{ asset('storage/' . $hotel->image) }}" alt="Hotel Image" class="mt-4 max-w-xs rounded-lg shadow">
         @endif
 
-        @auth
-        @if (auth()->id() == )
+        
         <div class="flex space-x-4 mb-6">
             <a href="{{ route('reviews.index', $hotel->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
                 Reviews
             </a>
+            @if(auth()->check() && auth()->user()->hasRole('admin')) 
             <a href="{{ route('hotels.edit', $hotel->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                 Edit
             </a>
+            @endif
             <a href="{{ route('hotels.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Back to list
             </a>
@@ -55,13 +56,14 @@
                 </div>
             @endforeach
         </div>
-
+        @if(auth()->check() && auth()->user()->hasRole('admin')) 
         <a href="{{ route('rooms.create', ['hotel' => $hotel->id]) }}" class="mt-4 inline-block bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
             Create Room
         </a>
         <a href="{{ route('services.create', ['hotel' => $hotel->id]) }}" class="mt-4 inline-block bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
             Create Service
         </a>
+        @endif
     </div>
 </div>
 @endsection

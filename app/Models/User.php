@@ -25,7 +25,8 @@ class User extends Authenticatable
 
     ];
 
-    const ROLE_USER = 'user';
+    const ROLE_GUEST = 'guest';
+    const ROLE_EMPLOYEE = 'employee';
     const ROLE_ADMIN = 'admin';
 
     /**

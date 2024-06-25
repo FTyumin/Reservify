@@ -13,11 +13,26 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //
-        User::create([
-            'name' => 'Admin',
-            'email' => 'feodorstjumins@gmail.com',
+       
+      User::insert([
+        [
+            'name' => 'JohnSmith',
+            'email' => 'john.smith@gmail.com',
             'password' => bcrypt('password'),
-            'role' => User::ROLE_ADMIN,
-      ]);
+            'role' => User::ROLE_GUEST,
+        ],
+        [
+            'name' => 'Janis',
+            'email' => 'janis.berzins@gmail.com',
+            'password' => bcrypt('password'),
+            'role' => User::ROLE_GUEST,
+        ],
+        [
+            'name' => 'Anna_Liep',
+            'email' => 'anna.liepina@inbox.lv',
+            'password' => bcrypt('password'),
+            'role' => User::ROLE_GUEST,
+        ],
+    ]);
     }
 }

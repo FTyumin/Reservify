@@ -33,7 +33,7 @@
                         <span class="ml-2">{{ $hotel->reviews_count }} Rating</span>
                     </div>
                 </div>
-                @if(auth()->user()->hasRole('admin')) 
+                @if(auth()->check() && auth()->user()->hasRole('admin')) 
                 <div class="mt-4 flex space-x-3">
                     <a href="{{ route('hotels.edit', $hotel) }}"
                         class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-xs">
