@@ -7,11 +7,11 @@
         @method('PUT')
         <div>
             <label for="check_in">Check In</label>
-            <input type="date" id="check_in" name="check_in" value="{{ $reservation->check_in }}">
+            <input type="date" id="check_in" name="check_in" value="{{ $reservation->check_in->format('Y-m-d') }}">
         </div>
         <div>
             <label for="check_out">Check Out</label>
-            <input type="date" id="check_out" name="check_out" value="{{ $reservation->check_out }}">
+            <input type="date" id="check_out" name="check_out" value="{{ $reservation->check_out->format('Y-m-d') }}">
         </div>
         <div>
             <label for="is_active">Is Active</label>

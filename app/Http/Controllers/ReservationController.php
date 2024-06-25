@@ -51,11 +51,14 @@ class ReservationController extends Controller
 
     public function show(Hotel $hotel, Reservation $reservation)
     {
+        $reservation->load('guest.user');
         return view('reservations.show', compact('hotel','reservation'));
     }
 
     public function edit(Hotel $hotel, Reservation $reservation)
     {
+        // $reservation->check_in = $reservation->check_in->format('Y-m-d');
+        // $reservation->check_out = $reservation->check_out->format('Y-m-d');
         
         $services = Service::all();
         return view('reservations.edit', compact('hotel', 'reservation', 'services'));

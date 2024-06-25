@@ -11,6 +11,11 @@ class Reservation extends Model
 
     protected $fillable = ['hotel_id', 'room_id', 'user_id', 'check_in', 'check_out', 'is_active'];
 
+    protected $casts = [
+        'check_in' => 'datetime:Y-m-d',
+        'check_out' => 'datetime:Y-m-d',
+    ];
+
     public function room()
     {
         return $this->belongsTo(Room::class);
@@ -18,7 +23,7 @@ class Reservation extends Model
 
     public function guest()
     {
-        return $this->belongsTo(Guest::class);
+        return $this->belongsTo(Guest::class, 'user_id');
     }
 
     public function payments()
