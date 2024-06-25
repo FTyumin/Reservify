@@ -125,11 +125,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/hotels/{hotel}/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
     Route::post('/hotels/{hotel}/reservations', [ReservationController::class, 'store'])->name('reservations.store');
-    Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
-    Route::get('/reservations/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
-    Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
-    Route::patch('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
-    Route::delete('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
+    Route::get('/hotels/{hotel}/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+    Route::get('/hotels/{hotel}/reservations/{reservation}', [ReservationController::class, 'show'])->name('reservations.show');
+    Route::get('/hotels/{hotel}/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
+    Route::patch('/hotels/{hotel}/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
+    Route::delete('/hotels/{hotel}/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 
     Route::get('/hotels/{hotel}/rooms/{room}/cleaning-schedules', [CleaningScheduleController::class, 'index'])->name('cleaning_schedules.index');
     Route::get('/hotels/{hotel}/rooms/{room}/cleaning-schedules/create', [CleaningScheduleController::class, 'create'])->name('cleaning_schedules.create');
