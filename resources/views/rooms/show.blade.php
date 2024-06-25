@@ -22,7 +22,9 @@
         <a href="{{ route('hotels.show', ['hotel' => $hotel->id]) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
             Return back to hotel 
         </a>
-        @if(auth()->check() && auth()->user()->hasRole('admin'))
+        <a href="{{ route('cleaning_schedules.index', ['hotel' => $hotel->id, 'room' => $room->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Cleaning Schedules
+        </a>
         <a href="{{ route('rooms.edit', ['hotel' => $hotel->id, 'room' => $room->id]) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
             Edit Room
         </a>
@@ -34,7 +36,6 @@
                 Delete
             </button>
         </form>
-        @endif
     </div>
 </div>
 @endsection
