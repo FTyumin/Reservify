@@ -8,12 +8,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Reservation;
 
 class ProfileController extends Controller
 {
     /**
      * Display the user's profile form.
      */
+    public function show(Request $request)
+    {
+        $user = $request->user();
+        $reservations = Reservation::where('user_id', $user->id)->with('hotel', 'room')->get();
+
+        return view('profile.myprofile', compact('user', 'reservations'));
+    }
+
     public function edit(Request $request): View
     {
         return view('profile.edit', [
