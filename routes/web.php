@@ -78,6 +78,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
         Route::delete('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
         
+        
 
         //reviews
         Route::get('/hotels/{hotel}/reviews/create', [ReviewController::class, 'create'])->name('reviews.create');
@@ -85,6 +86,14 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/reviews/{review}/edit', [ReviewController::class, 'edit'])->name('reviews.edit');
         Route::patch('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
         Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
+
+        Route::get('/hotels/{hotel}/services', [ServiceController::class, 'index'])->name('services.index');
+    Route::get('/hotels/{hotel}/services/create', [ServiceController::class, 'create'])->name('services.create');
+    Route::post('/hotels/{hotel}/services', [ServiceController::class, 'store'])->name('services.store');
+    Route::get('/hotels/{hotel}/services/{service}', [ServiceController::class, 'show'])->name('services.show');
+    Route::get('/hotels/{hotel}/services/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
+    Route::put('/hotels/{hotel}/services/{service}', [ServiceController::class, 'update'])->name('services.update');
+    Route::delete('/hotels/{hotel}/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
     });
 
     Route::get('/hotels', [HotelController::class, 'index'])->name('hotels.index');
@@ -99,6 +108,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/hotels', [HotelController::class, 'index'])->name('hotels.index');
 Route::get('/hotels/{hotel}', [HotelController::class, 'show'])->name('hotels.show');
+Route::get('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
 
 
 
