@@ -1,12 +1,9 @@
 <?php
 
 namespace App\Http\Middleware;
-use Spatie\Permission\Traits\HasRole;
+
 use Closure;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-
-
 
 class AdminMiddleware
 {
@@ -26,4 +23,3 @@ class AdminMiddleware
         return redirect('/')->with('error', 'You do not have access to this page.');
     }
 }
-

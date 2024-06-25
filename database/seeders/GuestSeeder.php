@@ -15,7 +15,7 @@ class GuestSeeder extends Seeder
     {
         Guest::insert([
             [
-                'user_id'=>2,
+                'user_id'=>1,
                 'name' => 'John',
                 'surname' => 'Smith',
                 'email' => 'john.smith@gmail.com',
@@ -23,7 +23,7 @@ class GuestSeeder extends Seeder
                 'credit_card_number' => '1234-5678-9101-1121',
             ],
             [
-                'user_id'=>3,
+                'user_id'=>2,
                 'name' => 'Janis',
                 'surname' => 'Berzins',
                 'email' => 'janis.berzins@gmail.com',
@@ -31,7 +31,7 @@ class GuestSeeder extends Seeder
                 'credit_card_number' => '5618-8429-6121-2761',
             ],
             [
-                'user_id'=>4,
+                'user_id'=>3,
                 'name' => 'Anna',
                 'surname' => 'Liepina',
                 'email' => 'anna.liepina@inbox.lv',

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
+use App\Models\Permission;
 
 class Roleseeder extends Seeder
 {
@@ -14,9 +15,39 @@ class Roleseeder extends Seeder
     public function run(): void
     {
         //
+        $permissions = [
+            'view-hotels',
+            'create-hotels',
+            'edit-hotels',
+            'delete-hotels',
+            'view-rooms',
+            'create-rooms',
+            'edit-rooms',
+            'delete-rooms',
+            'view-services',
+            'create-services',
+            'edit-services',
+            'delete-services',
+        ];
+        foreach ($permissions as $permission) {
+            Permission::create(['name' => $permission]);
+        }
+        
+        $guestRole = Role::create(['name' => 'guest']);
+        $adminRole = Role::create(['name' => 'admin']);
+        $employeeRole = Role::create(['name' => 'employee']);
 
-        Role::create(['name' => 'guest']);
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'employee']);
+        $employeeRole->givePermissionTo([
+            'view-hotels',
+            'view-rooms',
+            'view-services',
+        ]);
+
+        $guestRole->givePermissionTo([
+            'view-hotels',
+            'view-rooms',
+            'view-services',
+        ]);
+        $adminRole->givePermissionTo(Permission::all());
     }
 }

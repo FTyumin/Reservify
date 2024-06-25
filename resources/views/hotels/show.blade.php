@@ -13,19 +13,7 @@
             <img src="{{ asset('storage/' . $hotel->image) }}" alt="Hotel Image" class="mt-4 max-w-xs rounded-lg shadow">
         @endif
 
-        {{-- Authentication Check --}}
-        @if(auth()->check())
-            <p>User is authenticated.</p>
-        @else
-            <p>User is not authenticated.</p>
-        @endif
-
-        {{-- User Role Check --}}
-        @if(auth()->check() && auth()->user()->hasRole('admin'))
-            <p>User has admin role.</p>
-        @else
-            <p>User does not have admin role.</p>
-        @endif
+ 
 
         <div class="flex space-x-4 mb-6">
             <a href="{{ route('reviews.index', $hotel->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
@@ -33,11 +21,13 @@
             </a>
             
             {{-- Edit Button for Admin --}}
-            @if(auth()->check() && auth()->user()->hasRole('admin'))
-                <a href="{{ route('hotels.edit', $hotel->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                    Edit
-                </a>
-            @endif
+            
+            @if(auth()->check() && auth()->user()->can('edit-hotels'))
+            <a href="{{ route('hotels.edit', $hotel->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                Edit
+            </a>
+        @endif
+            
 
             <a href="{{ route('hotels.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Back to list

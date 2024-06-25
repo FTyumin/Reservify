@@ -61,17 +61,21 @@ Route::get('/dashboard', function () {
 //     Route::delete('/hotels/{hotel}/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
 // });
 
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::middleware(['admin'])->group(function () {
-        Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
-        Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
-        Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
-        Route::patch('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
-        Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotels.destroy');
+        
+    Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
+    Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
+    Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
+    Route::patch('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
+    Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotels.destroy');
+
+    // Route::middleware(['admin'])->group(function () {
+        
 
         
         //rooms
@@ -99,7 +103,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/hotels/{hotel}/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
     });
 
-    Route::get('/hotels', [HotelController::class, 'index'])->name('hotels.index');
     Route::get('/hotels/{hotel}', [HotelController::class, 'show'])->name('hotels.show');
     Route::get('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
     Route::get('/hotels/{hotel}/rooms', [HotelController::class, 'index'])->name('rooms.index');
@@ -135,20 +138,20 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/hotels/{hotel}/rooms/{room}/cleaning-schedules/{cleaningSchedule}/edit', [CleaningScheduleController::class, 'edit'])->name('cleaning_schedules.edit');
     Route::patch('/hotels/{hotel}/rooms/{room}/cleaning-schedules/{cleaningSchedule}', [CleaningScheduleController::class, 'update'])->name('cleaning_schedules.update');
     Route::delete('/hotels/{hotel}/rooms/{room}/cleaning-schedules/{cleaningSchedule}', [CleaningScheduleController::class, 'destroy'])->name('cleaning_schedules.destroy');
-});
+// });
 
 
 
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
-    Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
-    Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
-    Route::patch('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
-    Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotels.destroy');
-});
+// Route::middleware(['auth', 'admin'])->group(function () {
+//     Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
+//     Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
+//     Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
+//     Route::patch('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
+//     Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotels.destroy');
+// });
 
-Route::get('/hotels', [HotelController::class, 'index'])->name('hotels.index');
+
 Route::get('/hotels/{hotel}', [HotelController::class, 'show'])->name('hotels.show');
 Route::get('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
 
