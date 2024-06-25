@@ -11,6 +11,10 @@ class CleaningSchedule extends Model
 
     protected $fillable = ['room_id', 'cleaning_date', 'employee_id'];
 
+    protected $casts = [
+        'cleaning_date' => 'datetime',
+    ];
+
     public function room()
     {
         return $this->belongsTo(Room::class);
