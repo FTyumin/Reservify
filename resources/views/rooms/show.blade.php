@@ -36,6 +36,7 @@
                 Delete
             </button>
         </form>
+        @endif
     </div>
 </div>
 @endsection

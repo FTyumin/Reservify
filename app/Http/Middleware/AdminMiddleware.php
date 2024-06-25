@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Traits\HasRole;
 use Closure;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -19,8 +19,7 @@ class AdminMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $user = auth()->user(); 
-        if (Auth::check() && Auth::user()->HasRoles('Admin')) {
+        if (Auth::check() && Auth::user()->hasRole('admin')) {
             return $next($request);
         }
 
