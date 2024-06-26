@@ -30,20 +30,24 @@
         <a href="{{ route('cleaning_schedules.index', ['hotel' => $hotel->id, 'room' => $room->id]) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
             Cleaning Schedules
         </a>
-        @if(auth()->check() && auth()->user()->hasRole('admin')||auth()->user()->hasRole('employee'))
+        @if(auth()->check())
+        @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('employee'))
         <a href="{{ route('rooms.edit', ['hotel' => $hotel->id, 'room' => $room->id]) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
             Edit Room
         </a>
+        
         @if(auth()->user()->hasRole('admin'))
-        <form action="{{ route('rooms.destroy', ['hotel' => $hotel->id, 'room' => $room->id]) }}" method="POST" class="inline">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                Delete
-            </button>
+            <form action="{{ route('rooms.destroy', ['hotel' => $hotel->id, 'room' => $room->id]) }}" method="POST" class="inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Delete
+                </button>
+            </form>
+                @endif
             @endif
-        </form>
         @endif
+
 
     </div>
 </div>

@@ -16,20 +16,25 @@
                     Room {{ $room->room_number }}
                 </a>
 
-                @if(auth()->check() && auth()->user()->hasRole('admin') || auth()->user()->hasRole('employee'))
-                <div class="flex items-center">
-                    <a href="{{ route('rooms.edit', $room->id) }}" class="text-sm bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded mr-2">
-                        Edit
-                    </a>
-                    <form action="{{ route('rooms.destroy', $room->id) }}" method="POST" class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-sm bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded">
-                            Delete
-                        </button>
-                    </form>
-                </div>
-                @endif
+                @if(auth()->check())
+             @if(auth()->user()->hasRole('admin') || auth()->user()->hasRole('employee'))
+        <div class="flex items-center">
+            <a href="{{ route('rooms.edit', $room->id) }}" class="text-sm bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded mr-2">
+                Edit
+            </a>
+            @if(auth()->user()->hasRole('admin'))
+                <form action="{{ route('rooms.destroy', $room->id) }}" method="POST" class="inline">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-sm bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-3 rounded">
+                        Delete
+                    </button>
+                </form>
+            @endif
+        </div>
+    @endif
+@endif
+
                 
             </li>
             @endforeach
