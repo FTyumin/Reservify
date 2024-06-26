@@ -44,7 +44,7 @@ class ReservationController extends Controller
             $reservation->services()->sync($validated['services']);
         }
 
-        return redirect()->route('reservations.index', ['hotel' => $hotel->id])->with('success', 'Reservation created successfully!');
+        return redirect()->route('reservations.show', ['hotel' => $hotel->id, 'reservation'=>$reservation->id])->with('success', 'Reservation created successfully!');
     }
 
     public function show(Hotel $hotel, Reservation $reservation)

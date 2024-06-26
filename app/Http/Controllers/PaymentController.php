@@ -52,6 +52,6 @@ class PaymentController extends Controller
         $paidReservations = session()->get('paid_reservations', []);
         $paidReservations[] = $request->reservation_id;
         session(['paid_reservations' => $paidReservations]);
-        return redirect()->route('my_profile.show')->with('success', 'Payment was successful.');
+        return redirect()->route('myprofile.show')->with('success', 'Payment was successful.');
     }
 }
