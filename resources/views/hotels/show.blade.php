@@ -7,7 +7,11 @@
         <p class="text-gray-600">Location: {{ $hotel->location }}</p>
         <p class="text-gray-600">Email: {{ $hotel->email }}</p>
         <p class="text-gray-600">Phone: {{ $hotel->phone }}</p>
-        <p class="text-gray-600 mb-4">Rating: {{ $hotel->rating }}</p>
+        @if($averageRating)
+            <p class="text-gray-600 mb-4">Rating: {{ number_format($averageRating, 1) }} (based on {{ $hotel->reviews->count() }} reviews)</p>
+        @else
+            <p class="text-gray-600 mb-4">Rating: {{ $hotel->rating }}</p>
+        @endif
 
         @if($hotel->image)
             <img src="{{ asset('storage/' . $hotel->image) }}" alt="Hotel Image" class="mt-4 max-w-xs rounded-lg shadow">

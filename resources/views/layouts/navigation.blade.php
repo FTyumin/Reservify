@@ -7,9 +7,5 @@
         <a href="/contact" class="text-gray-600 hover:text-gray-800">Contact</a>
         <a href="{{ route('my_profile.show') }}" class="text-gray-600 hover:text-gray-800">My profile</a>
       </div>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Book Now
-      </button>
-    </div>
-  </nav>
-  
+  </div>
+</nav>

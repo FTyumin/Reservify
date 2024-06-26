@@ -51,7 +51,7 @@
 
         <div>
             <label for="image" class="block text-sm font-medium text-gray-700">Image:</label>
-            <input type="file" name="image" id="image" required
+            <input type="file" name="image" id="image" 
                    class="mt-1 block w-full px-3 py-2 file:border file:border-gray-300 file:rounded file:text-sm file:px-5 file:py-2 file:bg-white file:text-gray-700 hover:file:bg-gray-50">
         </div>
 
