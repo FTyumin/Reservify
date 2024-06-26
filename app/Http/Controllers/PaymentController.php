@@ -49,7 +49,9 @@ class PaymentController extends Controller
 
         // Send confirmation email
         Mail::to($request->email)->send(new PaymentConfirmation($payment));
-
+        $paidReservations = session()->get('paid_reservations', []);
+        $paidReservations[] = $request->reservation_id;
+        session(['paid_reservations' => $paidReservations]);
         return redirect()->route('my_profile.show')->with('success', 'Payment was successful.');
     }
 }

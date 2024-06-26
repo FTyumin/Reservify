@@ -14,10 +14,6 @@
             <input type="date" id="check_out" name="check_out" value="{{ $reservation->check_out->format('Y-m-d') }}">
         </div>
         <div>
-            <label for="is_active">Is Active</label>
-            <input type="checkbox" id="is_active" name="is_active" value="1" {{ $reservation->is_active ? 'checked' : '' }}>
-        </div>
-        <div>
             <label for="services">Services</label>
             <select multiple id="services" name="services[]">
                 @foreach($services as $service)

@@ -29,7 +29,6 @@ class ReservationController extends Controller
         $validated = $request->validate([
             'check_in' => 'required|date',
             'check_out' => 'required|date',
-            'is_active' => 'required|boolean',
             'services' => 'nullable|array',
         ]);
 
@@ -38,7 +37,6 @@ class ReservationController extends Controller
             'user_id' => $request->user()->id,
             'check_in' => $validated['check_in'],
             'check_out' => $validated['check_out'],
-            'is_active' => $validated['is_active'],
             'hotel_id' => $hotel->id,
         ]);
 
@@ -69,7 +67,6 @@ class ReservationController extends Controller
         $validated = $request->validate([
             'check_in' => 'required|date',
             'check_out' => 'required|date|after:check_in',
-            'is_active' => 'required|boolean',
             'services' => 'nullable|array',
         ]);
 

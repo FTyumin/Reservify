@@ -17,8 +17,10 @@ return new class extends Migration
             $table->unsignedBigInteger('reservation_id');
             $table->integer('amount');
             $table->date('date');
-            $table->string('payment_method');
-            $table->string('status');
+            $table->string('credit_card_number')->nullable();
+            $table->string('expiry_date')->nullable();
+            $table->string('cvv')->nullable();
+            $table->string('email')->nullable();
             $table->foreign('reservation_id')->references('id')->on('reservations')->onDelete('cascade');
             $table->timestamps();
         });

@@ -22,7 +22,6 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->dateTime('check_in');
             $table->dateTime('check_out');
-            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

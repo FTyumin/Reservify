@@ -21,12 +21,13 @@
                         <div class="flex justify-between items-center mb-2">
                             <div>
                                 <strong>Reservation #{{ $reservation->id }}:</strong>
+                                <a href="{{ route('reservations.show', ['hotel' => $reservation->hotel_id, 'reservation' => $reservation->id]) }}" class="text-blue-500 hover:underline">View</a>
                                 {{ $reservation->details }} ({{ $reservation->created_at->format('d M Y') }})
-                                @if($reservation->payment_status)
-                                    <span class="text-green-600 ml-2">({{ $reservation->payment_status }})</span>
+                                @if(session('paid_reservations') && in_array($reservation->id, session('paid_reservations')))
+                                    <span class="text-green-600 ml-2">(Payment successful)</span>
                                 @endif
                             </div>
-                            @if(!$reservation->payment_status)
+                            @if(!session('paid_reservations') || !in_array($reservation->id, session('paid_reservations')))
                                 <a href="{{ route('payments.create', $reservation->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Make Payment</a>
                             @endif
                         </div>
