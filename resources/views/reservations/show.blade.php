@@ -9,6 +9,7 @@
         <p><strong>Room Type:</strong> {{ $reservation->room->type }}</p>
         <p><strong>Check-in Date:</strong> {{ $reservation->check_in }}</p>
         <p><strong>Check-out Date:</strong> {{ $reservation->check_out }}</p>
+        <p><strong>Services:</strong> {{ $reservation->service }}</p>
     </div>
 
     <p class="text-gray-700 leading-relaxed mb-4">
