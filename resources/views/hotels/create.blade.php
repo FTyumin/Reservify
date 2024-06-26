@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Create Hotel</h1>
+    <h1>{{ __('messages.create_hotel') }}</h1>
 
     @if ($errors->any())
         <div class="alert alert-danger">

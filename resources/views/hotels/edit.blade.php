@@ -32,7 +32,7 @@
         </div>
 
         <div>
-            <label for="email" class="block text-sm font-medium text-gray-700">Email:</label>
+            <label for="email" class="block text-sm font-medium text-gray-700">{{ __('messages.email') }}:</label>
             <input type="email" name="email" id="email" value="{{ $hotel->email }}" required
                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>

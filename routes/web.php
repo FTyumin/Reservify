@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CleaningScheduleController;
+use App\Http\Controllers\LocaleController;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
 
@@ -33,6 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reservations/payment/store', [PaymentController::class, 'store'])->name('payments.store');
 
     Route::get('/myprofile', [ProfileController::class, 'show'])->name('myprofile.show');
+    Route::post('/change-language', [LocaleController::class, 'changeLanguage'])->name('change-language');
 
         
     Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
