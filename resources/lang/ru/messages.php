@@ -69,6 +69,11 @@ return [
     'reservation_details' => 'Детали Бронирования',
     'help_text' => 'Для дальнейшей помощи, пожалуйста,',
     'no_reservations_found' => 'Бронирования не найдены.',
+    'reviews'=> 'Отзывы',
+    'Book_Now'=>'Зарезервировать',
+    'Contact_Us'=>'Связаться с нами',
+    'Email'=>'Электронная почта',
+    'Phone'=>'Телефон',
 
     // Specific to Hotel Index
     'hotels' => 'Отели',

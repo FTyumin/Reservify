@@ -19,7 +19,7 @@
 
         <div class="flex space-x-4 mb-6">
             <a href="{{ route('reviews.index', $hotel->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
-                Reviews
+                @lang('messages.reviews')
             </a>
 
             @if(auth()->check() && auth()->user()->can('edit-hotels'))

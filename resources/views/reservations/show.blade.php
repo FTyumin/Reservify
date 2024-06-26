@@ -14,7 +14,7 @@
 
     <p class="text-gray-700 leading-relaxed mb-4">
         @lang('messages.help_text')
-        <a href="{{ route('contact') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Contact Us</a>
+        <a href="{{ route('contact') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">@lang('messages.Contact_Us')</a>
     </p>
 
     <form action="{{ route('reservations.destroy', [$hotel->id, $reservation->id]) }}" method="POST" class="mt-4">
