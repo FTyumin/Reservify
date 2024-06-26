@@ -43,8 +43,17 @@ class Roleseeder extends Seeder
 
         $employeeRole->givePermissionTo([
             'view-hotels',
+            'edit-hotels',
+
             'view-rooms',
+            'edit-rooms',
+
             'view-services',
+            'edit-services',
+
+            'make-reservation',
+            'cancel-reservation',
+            'view-reservation',
         ]);
 
         $guestRole->givePermissionTo([
