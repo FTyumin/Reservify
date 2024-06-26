@@ -20,7 +20,7 @@ class ProfileController extends Controller
         $user = $request->user();
         $reservations = Reservation::where('user_id', $user->id)->with('hotel', 'room')->get();
 
-        return view('profile.myprofile', compact('user', 'reservations'));
+        return view('myprofile', compact('user', 'reservations') );
     }
 
     public function edit(Request $request): View

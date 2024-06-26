@@ -3,6 +3,8 @@
 @section('content')
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-bold mb-4">Profile</h1>
+
+    {{-- <input type="hidden" name="user_id" value="{{ Auth::id() }}"> --}}
     
     <div class="bg-white shadow-md rounded-lg p-6 mb-4">
         <h2 class="text-xl font-semibold mb-2">User Information</h2>
