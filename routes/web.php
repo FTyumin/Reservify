@@ -68,7 +68,6 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/myprofile', [ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
 
 
         
@@ -171,7 +170,7 @@ Route::get('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'show'])->nam
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
-Route::get('/myprofile', [PageController::class, 'myprofile'])->name('myprofile');
+Route::get('/myprofile', [ProfileController::class, 'show'])->name('my_profile.show');
 
 // Hotels
 // Route::get('/hotels', [HotelController::class, 'store'])->middleware('auth');
