@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Service;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
             AdminSeeder::class,
             EmployeeSeeder::class,
             GuestSeeder::class,
+            ServiceSeeder::class,
 
         ]);
 

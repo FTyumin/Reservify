@@ -22,10 +22,14 @@
             <img src="{{ asset('storage/' . $hotel->image) }}" alt="Hotel Image" class="mt-4 max-w-xs rounded-lg shadow">
         @endif
 
+        <br>
+
+  
         <div class="flex space-x-4 mb-6">
             <a href="{{ route('reviews.index', $hotel->id) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
                 @lang('messages.reviews')
             </a>
+
 
             @if(auth()->check() && auth()->user()->can('edit-hotels'))
                 <a href="{{ route('hotels.edit', $hotel->id) }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
@@ -47,7 +51,7 @@
                             {{ $room->type }}
                         </a>
                         <p class="text-gray-600 mt-2">@lang('messages.price_night'): {{ $room->price }}€</p>
-
+                        <br>
                         <a href="{{ route('reservations.create', ['hotel' => $hotel->id, 'room' => $room->id]) }}" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             @lang('messages.book_now')
                         </a>
