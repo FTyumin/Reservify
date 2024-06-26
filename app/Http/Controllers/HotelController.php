@@ -8,22 +8,9 @@ use Illuminate\Support\Facades\Storage;
 
 class HotelController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware(['permission:product-list|product-create|product-edit|product-delete'], ['only' => ['index', 'show']]);
-    //     $this->middleware(['permission:hotel-create'], ['only' => ['create', 'store']]);
-    //     $this->middleware(['permission:hotel-edit'], ['only' => ['edit', 'update']]);
-    //     $this->middleware(['permission:hotel-delete'], ['only' => ['destroy']]);
-    // }
-
     public function index()
     {
         $hotels = Hotel::with('reviews')->get();
-
-        foreach ($hotels as $hotel) {
-            $hotel->averageRating = $hotel->reviews->avg('rating') ?: $hotel->rating;
-        }
-
         return view('hotels.index', compact('hotels'));
     }
 
@@ -61,8 +48,7 @@ class HotelController extends Controller
 
     public function show(Hotel $hotel)
     {
-        $reviews = $hotel->reviews;
-        $averageRating = $reviews->avg('rating');
+        $averageRating = $hotel->average_rating; // Using the accessor
         return view('hotels.show', compact('hotel', 'averageRating'));
     }
 
@@ -81,7 +67,7 @@ class HotelController extends Controller
             'phone' => 'required|string|max:20',
             'rating' => 'required|numeric|min:0|max:5',
             'description' => 'required|string',
-            'image' => 'sometimes|file|image|max:1024', // Adjust according to your needs
+            'image' => 'sometimes|file|image|max:1024',
         ]);
 
         if ($request->hasFile('image')) {
@@ -93,14 +79,7 @@ class HotelController extends Controller
             $hotel->image = $imagePath;
         }
 
-        $hotel->update([
-            'name' => $request->name,
-            'location' => $request->location,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'rating' => $request->rating,
-            'description' => $request->description,
-        ]);
+        $hotel->update($request->only(['name', 'location', 'email', 'phone', 'rating', 'description']));
 
         return redirect()->route('hotels.index')->with('success', 'Hotel updated successfully.');
     }

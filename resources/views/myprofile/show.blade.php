@@ -37,20 +37,6 @@
         @endif
     </div>
 
-    <div class="mt-4">
-        <h2 class="text-xl font-semibold mb-2">@lang('messages.language_preference')</h2>
-        <form action="{{ route('locale', app()->getLocale()) }}" method="POST" class="flex items-center">
-            @csrf
-            <label for="language" class="mr-2">@lang('messages.select_language')</label>
-            <select name="lang" id="language" onchange="this.form.submit()" class="border border-gray-300 rounded px-3 py-1 focus:outline-none focus:border-blue-500">
-                <option value="en" @if(app()->getLocale() == 'en') selected @endif>English</option>
-                <option value="lv" @if(app()->getLocale() == 'lv') selected @endif>Latvian</option>
-                <option value="ru" @if(app()->getLocale() == 'ru') selected @endif>Russian</option>
-            </select>
-            <button type="submit" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">@lang('messages.change_language')</button>
-        </form>
-    </div>
-
     <form id="logout-form" action="{{ route('logout') }}" method="POST">
         @csrf
         <button type="submit" class="btn btn-danger">

@@ -11,6 +11,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CleaningScheduleController;
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\LocaleController;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
@@ -30,11 +31,13 @@ Route::middleware(['auth'])->group(function () {
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::post('/locale-switch', [LocaleController::class, 'switch'])->name('locale.switch');
+
+
     Route::get('/reservations/{reservation}/payment/create', [PaymentController::class, 'create'])->name('payments.create');
     Route::post('/reservations/payment/store', [PaymentController::class, 'store'])->name('payments.store');
 
     Route::get('/myprofile', [ProfileController::class, 'show'])->name('myprofile.show');
-    Route::post('/locale/{lang}', [LocaleController::class, 'setLocale'])->name('locale');
 
         
     Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
