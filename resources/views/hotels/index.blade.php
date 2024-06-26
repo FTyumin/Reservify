@@ -24,15 +24,16 @@
             <div class="p-4">
                 <p class="text-lg font-semibold text-gray-800">{{ $hotel->name }}</p>
                 <p class="text-sm text-gray-600">{{ $hotel->location }}</p>
+
                 <div class="flex items-center justify-between mt-3">
                     <a href="{{ route('hotels.show', $hotel) }}" class="text-blue-500 hover:text-blue-700 font-medium">
                         Show prices
                     </a>
                     <div class="flex items-center text-sm text-gray-600">
-                        <span class="inline-block bg-yellow-300 text-yellow-800 text-xs px-2 rounded-full uppercase font-semibold tracking-wide">
-                            {{ $hotel->rating }}
+                        <span class="inline-block bg-yellow-300 text-yellow-800 text-s px-2 rounded-full uppercase font-semibold tracking-wide">
+                            {{ number_format($hotel->averageRating, 1) }}
                         </span>
-                        <span class="ml-2">{{ $hotel->reviews_count }} Rating</span>
+                        <span class="ml-2"> Rating</span>
                     </div>
                 </div>
                 @if(auth()->check() && auth()->user()->hasRole('admin'))

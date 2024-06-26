@@ -10,7 +10,12 @@ class HotelController extends Controller
 {
     public function index()
     {
-        $hotels = Hotel::all();
+        $hotels = Hotel::with('reviews')->get();
+        
+        foreach ($hotels as $hotel) {
+            $hotel->averageRating = $hotel->reviews->avg('rating')?: $hotel->rating;
+        }
+
         return view('hotels.index', compact('hotels'));
     }
 
@@ -75,11 +80,11 @@ class HotelController extends Controller
         return redirect()->route('hotels.index')->with('success', 'Hotel created successfully.');
     }
 
-    public function show($id)
+    public function show(Hotel $hotel)
     {
-        $hotel = Hotel::findOrFail($id);
-        $hotel->load('rooms', 'services');
-        return view('hotels.show', compact('hotel'));
+        $reviews = $hotel->reviews;
+        $averageRating = $reviews->avg('rating');
+        return view('hotels.show', compact('hotel', 'averageRating'));
     }
 
     public function edit($id)
