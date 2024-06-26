@@ -8,18 +8,21 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CleaningScheduleController;
 use App\Http\Controllers\LocaleController;
+use App\Mail\PaymentConfirmation;
+use App\Models\Payment;
+use Illuminate\Support\Facades\Mail;
+use PharIo\Manifest\Email;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
-
 
 
 
@@ -80,6 +83,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/hotels/{hotel}/services/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
     Route::put('/hotels/{hotel}/services/{service}', [ServiceController::class, 'update'])->name('services.update');
     Route::delete('/hotels/{hotel}/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
+
+    Route::get('/reservations/{reservation}/payment/create', [PaymentController::class, 'create'])->name('payments.create');
+    Route::post('/reservations/payment/store', [PaymentController::class, 'store'])->name('payments.store');
     });
 
     Route::get('/hotels/{hotel}', [HotelController::class, 'show'])->name('hotels.show');

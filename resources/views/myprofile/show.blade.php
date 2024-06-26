@@ -42,7 +42,7 @@
 
     <div class="mt-4">
         <h2 class="text-xl font-semibold mb-2">{{ __('messages.language_preference') }}</h2>
-        Current Locale: {{ $currentLocale }}
+        Current Locale: {{ app()->getLocale() }}
         <form action="{{ route('change-language') }}" method="POST" class="flex items-center">
             @csrf
             <label for="language" class="mr-2">{{ __('messages.select_language') }}</label>
@@ -54,6 +54,9 @@
             <button type="submit" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">{{ __('messages.change_language') }}</button>
         </form>
     </div>
+
+    {{-- @session()->get('locale') --}}
+    
 
     <form id="logout-form" action="{{ route('logout') }}" method="POST">
         @csrf

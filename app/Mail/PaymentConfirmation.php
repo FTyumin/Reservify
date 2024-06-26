@@ -21,7 +21,8 @@ class PaymentConfirmation extends Mailable
 
     public function build()
     {
-        return $this->markdown('emails.payment_confirmation')
+        return $this->from('reservify24@gmail.com')
+            ->markdown('emails.payment_confirmation')
                     ->subject('Payment Confirmation');
     }
 }
