@@ -18,6 +18,7 @@ return [
     'room_type' => 'Room Type',
     'submit' => 'Submit',
     'update_schedule' => 'Update Schedule',
+    'reviews'=> 'Reviews',
     
     // Error Messages
     'cleaning_date_error' => 'Cleaning Date Error: :message',
