@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/reservations/payment/store', [PaymentController::class, 'store'])->name('payments.store');
 
     Route::get('/myprofile', [ProfileController::class, 'show'])->name('myprofile.show');
-    Route::post('/change-language', [LocaleController::class, 'changeLanguage'])->name('change-language');
+    Route::post('/locale/{lang}', [LocaleController::class, 'setLocale'])->name('locale');
 
         
     Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');

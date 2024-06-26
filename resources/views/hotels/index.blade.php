@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ __('messages.hotels') }}</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">@lang('messages.hotels')</h1>
 
     @if (session('success'))
         <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4" role="alert">
@@ -13,7 +13,7 @@
     @if(auth()->check() && auth()->user()->hasRole('admin'))
     <button onclick="window.location.href='{{ route('hotels.create') }}'"
         class="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        {{ __('messages.create_hotel') }}
+        @lang('messages.create_hotel')
         
     </button>
     @endif
@@ -28,7 +28,7 @@
 
                 <div class="flex items-center justify-between mt-3">
                     <a href="{{ route('hotels.show', $hotel) }}" class="text-blue-500 hover:text-blue-700 font-medium">
-                        {{ __('messages.show_prices') }}
+                        @lang('messages.show_prices')
                         
                     </a>
                     <div class="flex items-center text-sm text-gray-600">
@@ -42,7 +42,7 @@
                 <div class="mt-4 flex space-x-3">
                     <a href="{{ route('hotels.edit', $hotel) }}"
                         class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-xs">
-                        {{ __('messages.edit') }}
+                        @lang('messages.edit')
                         
                     </a>
                     
@@ -51,7 +51,7 @@
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
-                            {{ __('messages.delete') }}
+                            @lang('messages.delete')
                         
                         </button>
                         
