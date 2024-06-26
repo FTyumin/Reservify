@@ -64,6 +64,7 @@ return [
     'check_in' => 'Ierašanās',
     'check_out' => 'Izrakstīšanās',
     'services' => 'Pakalpojumi',
+    'inspect_reservations'=>'Apskātīt rezervācijas',
     'select_service' => 'Izvēlieties pakalpojumu',
     'edit_reservation' => 'Rediģēt rezervāciju',
     'update_reservation' => 'Atjaunot rezervāciju',

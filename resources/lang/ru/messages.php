@@ -70,6 +70,7 @@ return [
     'help_text' => 'Для дальнейшей помощи, пожалуйста,',
     'no_reservations_found' => 'Бронирования не найдены.',
     'reviews'=> 'Отзывы',
+    'inspect_reservations'=>'Посмотреть резервации',
     'Book_Now'=>'Зарезервировать',
     'Contact_Us'=>'Связаться с нами',
     'hotel_created_success' => 'Отель успешно создан.',

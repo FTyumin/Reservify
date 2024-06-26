@@ -83,6 +83,9 @@
             <a href="{{ route('services.create', ['hotel' => $hotel->id]) }}" class="mt-4 inline-block bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
                 @lang('messages.create_service')
             </a>
+            <a href="{{ route('reservations.index', ['hotel' => $hotel->id]) }}" class="mt-4 inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                @lang('messages.inspect_reservations')
+            </a>
         @endif
     </div>
 </div>
