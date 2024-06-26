@@ -35,4 +35,9 @@ class Hotel extends Model
     {
         return $this->hasManyThrough(Reservation::class, Room::class);
     }
+
+    public function getAverageRatingAttribute()
+    {
+        return $this->reviews->avg('rating') ?: $this->rating;
+    }
 }

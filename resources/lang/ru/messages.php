@@ -58,7 +58,7 @@ return [
     'create_payment_for_reservation' => 'Создать Платеж для Бронирования #:id',
     'about' => 'О нас',
     'contact' => 'Контакты',
-    'reservify' => 'Резервифи',
+    'reservify' => 'Reservify',
     'create_reservation' => 'Создать Бронирование',
     'check_in' => 'Заезд',
     'check_out' => 'Выезд',
