@@ -13,7 +13,8 @@
     @if(auth()->check() && auth()->user()->hasRole('admin'))
     <button onclick="window.location.href='{{ route('hotels.create') }}'"
         class="mb-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-        Create New Hotel
+        {{ __('messages.create_hotel') }}
+        
     </button>
     @endif
 
@@ -27,26 +28,29 @@
 
                 <div class="flex items-center justify-between mt-3">
                     <a href="{{ route('hotels.show', $hotel) }}" class="text-blue-500 hover:text-blue-700 font-medium">
-                        Show prices
+                        {{ __('messages.show_prices') }}
+                        
                     </a>
                     <div class="flex items-center text-sm text-gray-600">
                         <span class="inline-block bg-yellow-300 text-yellow-800 text-s px-2 rounded-full uppercase font-semibold tracking-wide">
                             {{ number_format($hotel->averageRating, 1) }}
                         </span>
-                        <span class="ml-2"> Rating</span>
+                        <span class="ml-2"> {{__('messages.rating')}}</span>
                     </div>
                 </div>
                 @if(auth()->check() && auth()->user()->hasRole('admin'))
                 <div class="mt-4 flex space-x-3">
                     <a href="{{ route('hotels.edit', $hotel) }}"
                         class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-3 rounded text-xs">
-                        Edit
+                        {{ __('messages.edit') }}
+                        
                     </a>
                     <form action="{{ route('hotels.destroy', $hotel) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
-                            Delete
+                            {{ __('messages.delete') }}
+                        
                         </button>
                     </form>
                 </div>
