@@ -2,35 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reservation;
-use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\PaymentConfirmation;
-use Carbon\Carbon;
+use App\Mail\MyTestEmail;
+use App\Models\Payment;
 
 class PaymentController extends Controller
 {
-    public function create($reservation_id)
-    {
-        $reservation = Reservation::findOrFail($reservation_id);
-        
-        // Calculate total price including room prices and services
-        $totalPrice = $reservation->room->price; // Assuming room price is per night
-        
-        foreach ($reservation->services as $service) {
-            $totalPrice += $service->price;
-        }
-        $today = Carbon::today()->format('Y-m-d');
-
-        return view('payments.create', compact('reservation', 'totalPrice','today'));
-    }
-
     public function store(Request $request)
     {
+        // Validate the request data
         $request->validate([
-            'reservation_id' => 'required|exists:reservations,id',
-            'amount' => 'required|integer|min:0',
+            'reservation_id' => 'required|integer',
+            'amount' => 'required|numeric',
             'date' => 'required|date',
             'credit_card_number' => 'required|string',
             'expiry_date' => 'required|string',
@@ -49,11 +33,14 @@ class PaymentController extends Controller
             'email' => $request->email,
         ]);
 
-        // Send confirmation email
-        Mail::to($request->email)->send(new PaymentConfirmation($payment));
+        // Send the email
+        Mail::to($request->email)->send(new MyTestEmail($payment));
+        
+        // Store paid reservations in session
         $paidReservations = session()->get('paid_reservations', []);
         $paidReservations[] = $request->reservation_id;
         session(['paid_reservations' => $paidReservations]);
+
         return redirect()->route('myprofile.show')->with('success', 'Payment was successful.');
     }
 }
