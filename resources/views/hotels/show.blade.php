@@ -42,8 +42,6 @@
                             {{ $room->type }}
                         </a>
                         <p class="text-gray-600 mt-2">{{ __('messages.price_night') }}: {{ $room->price }}€</p>
-                        {{-- <p>@dd(hotel->id)</p>
-                        <p>@dd(hotel->id)</p> --}}
 
                         <a href="{{ route('reservations.create', ['hotel' => $hotel->id, 'room' => $room->id]) }}" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             {{ __('messages.book_now') }}
@@ -54,7 +52,7 @@
             @endforeach
         </div>
 
-        <h2 class="text-2xl font-semibold mb-4">Services</h2>
+        <h2 class="text-2xl font-semibold mb-4">{{ __('messages.services') }}</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach ($hotel->services as $service)
                 <div class="bg-white rounded-lg shadow overflow-hidden">
