@@ -13,6 +13,6 @@ class ProfileController extends Controller
         $user = Auth::user();
         $reservations = Reservation::where('user_id', $user->id)->get();
 
-        return view('my_profile.show', compact('user', 'reservations'));
+        return view('myprofile.show', compact('user', 'reservations'));
     }
 }

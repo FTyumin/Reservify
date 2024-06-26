@@ -5,7 +5,7 @@
         <a href="/about" class="text-gray-600 hover:text-gray-800">About</a>
         {{-- <a href="/hotels" class="text-gray-600 hover:text-gray-800">Hotels</a> --}}
         <a href="/contact" class="text-gray-600 hover:text-gray-800">Contact</a>
-        <a href="{{ route('my_profile.show') }}" class="text-gray-600 hover:text-gray-800">My profile</a>
+        <a href="{{ route('myprofile.show') }}" class="text-gray-600 hover:text-gray-800">My profile</a>
       </div>
   </div>
 </nav>

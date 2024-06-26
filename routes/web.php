@@ -28,10 +28,11 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/myprofile', [ProfileController::class, 'show'])->name('my_profile.show');
 
     Route::get('/reservations/{reservation}/payment/create', [PaymentController::class, 'create'])->name('payments.create');
     Route::post('/reservations/payment/store', [PaymentController::class, 'store'])->name('payments.store');
+
+    Route::get('/myprofile', [ProfileController::class, 'show'])->name('myprofile.show');
 
         
     Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
@@ -129,6 +130,7 @@ Route::get('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'show'])->nam
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+
 
 // Hotels
 // Route::get('/hotels', [HotelController::class, 'store'])->middleware('auth');
