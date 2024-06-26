@@ -13,8 +13,7 @@
             
             <div class="mb-4">
                 <label for="date" class="block text-sm font-medium text-gray-700">Date</label>
-                <input type="date" id="date" name="date" value="{{ old('date') }}" class="mt-1 p-2 border border-gray-300 rounded-md w-full" required>
-                @error('date')
+                <input type="text" id="date" name="date" value="{{ $today }}" class="mt-1 p-2 border border-gray-300 rounded-md w-full" readonly required>                @error('date')
                     <p class="text-red-500 mt-1">{{ $message }}</p>
                 @enderror
             </div>
