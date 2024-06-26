@@ -1,12 +1,39 @@
 <?php
 
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
 
 class SampleMail extends Mailable
+
 {
-    public function build()
+
+    // public function envelope():Envelope
+    // {
+    //     return new Envelope(
+    //         subject:'Sample Email',
+    //         from: new Address('reservify24@gmail.com', 'Admin')
+    //     );
+    // }
+    public $mailMessage;
+    public $subject;
+    public function __construct($message, $subject)
     {
-        return $this->subject('Sample Email')
-                    ->view('emails.sample');
+        $this->mailMessage=$message;
+        $this->subject=$subject;
+    }
+    public function envelope():Envelope
+    {
+        return new Envelope(
+            subject:$this->subject
+        );
+    }
+
+
+    public function content():Content
+    {
+        return new Content(
+            view:'emails.test-email',
+        );
     }
 }

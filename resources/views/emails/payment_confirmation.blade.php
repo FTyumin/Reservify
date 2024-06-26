@@ -11,5 +11,6 @@
         <li>Amount: {{ $payment->amount }}€</li>
         <li>Date: {{ $payment->date }}</li>
     </ul>
+    <p>Reservify team</p>
 </body>
 </html>
