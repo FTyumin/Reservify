@@ -204,4 +204,10 @@ return [
     'select_language' => 'Izvēlieties valodu',
     'change_language' => 'Mainīt valodu',
     'language_changed' => 'Valoda veiksmīgi mainīta.',
+
+    'yes'=>'Jā',
+
+    'welcome'=>'Laipni lūdzam',
+
+    'user_name' => 'Lietotājvārds',
 ];

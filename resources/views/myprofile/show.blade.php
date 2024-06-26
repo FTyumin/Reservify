@@ -3,7 +3,11 @@
 @section('content')
 <div class="container mx-auto p-4">
     <h1 class="text-2xl font-semibold mb-4">@lang('messages.my_profile')</h1>
-
+    <div>
+        <h2>@lang('messages.welcome')!</h2>
+        <p><strong>@lang('messages.user_name'):</strong> {{ auth()->user()->name }}</p>
+        <p><strong>@lang('messages.email'):</strong> {{ auth()->user()->email }}</p>
+    </div>
     @if(session('success'))
         <div class="bg-green-200 text-green-800 border-green-300 border px-4 py-2 mb-4 rounded-md">
             {{ session('success') }}

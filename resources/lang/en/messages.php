@@ -20,6 +20,8 @@ return [
     'update_schedule' => 'Update Schedule',
     'reviews'=> 'Reviews',
     'inspect_reservations'=>'Inspect reservations',
+
+    'yes'=>'Yes',
     
     // Error Messages
     'cleaning_date_error' => 'Cleaning Date Error: :message',
@@ -200,4 +202,7 @@ return [
     'select_language' => 'Select Language',
     'change_language' => 'Change Language',
     'language_changed' => 'Language changed successfully.',
+
+    'welcome'=>'Welcome',
+    'user_name' => 'Username',
 ];

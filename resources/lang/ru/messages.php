@@ -200,4 +200,11 @@ return [
     'select_language' => 'Выберите язык',
     'change_language' => 'Изменить язык',
     'language_changed' => 'Язык успешно изменен.',
+
+    'yes'=>'Да',
+
+    'create_review' => 'Создать Отзыв',
+    'welcome'=>'Добро пожаловать',
+
+    'user_name' => 'Имя пользователя',
 ];
