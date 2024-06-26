@@ -43,7 +43,7 @@ class HotelController extends Controller
             'rating' => $request->rating,
         ]);
 
-        return redirect()->route('hotels.index')->with('success', 'Hotel created successfully.');
+        return redirect()->route('hotels.index')->with('success', __('messages.hotel_created_success'));
     }
 
     public function show(Hotel $hotel)
@@ -81,13 +81,13 @@ class HotelController extends Controller
 
         $hotel->update($request->only(['name', 'location', 'email', 'phone', 'rating', 'description']));
 
-        return redirect()->route('hotels.index')->with('success', 'Hotel updated successfully.');
+        return redirect()->route('hotels.index')->with('success', __('messages.hotel_created_success'));
     }
 
     public function destroy($id)
     {
         $hotel = Hotel::findOrFail($id);
         $hotel->delete();
-        return redirect()->route('hotels.index')->with('success', 'Hotel deleted successfully.');
+        return redirect()->route('hotels.index')->with('success', __('messages.hotel_created_success'));
     }
 }

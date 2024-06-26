@@ -24,6 +24,7 @@ return [
     'employee_id_error' => 'Employee ID Error: :message',
 
     // General
+    'hotel_created_success' => 'Hotel created successfully.',
     'hotel_name' => 'Hotel Name',
     'location' => 'Location',
     'email' => 'Email',

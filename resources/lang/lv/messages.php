@@ -69,9 +69,15 @@ return [
     'update_reservation' => 'Atjaunot rezervāciju',
     'reservation_details' => 'Rezervācijas informācija',
     'hotel_name' => 'Viesnīcas nosaukums',
+    'hotel_created_success' => 'Viesnīca veiksmīgi izveidota.',
     'room_type' => 'Numura tips',
     'help_text' => 'Lai iegūtu papildu palīdzību, lūdzu,',
     'no_reservations_found' => 'Nav atrasta neviena rezervācija.',
+    'reviews'=> 'Atsauksmes',
+    'Book_Now'=>'Rezervēt',
+    'Contact_Us'=>'Sazinies ar mums',
+    'Email'=>'Ē-pasts',
+    'Phone'=>'Tālrunis',
 
     // Specific to Hotel Index
     'hotels' => 'Viesnīcas',
