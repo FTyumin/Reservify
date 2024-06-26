@@ -36,7 +36,7 @@ return [
     'edit' => 'Rediģēt',
     'delete' => 'Dzēst',
     'back_list' => 'Atpakaļ uz sarakstu',
-    'show_prices' => 'Rādīt cenas',
+    'show_prices' => 'Parādīt cenas',
     'correct_errors' => 'Lūdzu, labojiet šādas kļūdas:',
     'book_now' => 'Rezervēt tagad',
     'create_room' => 'Izveidot numuru',

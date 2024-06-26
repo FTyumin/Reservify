@@ -12,14 +12,14 @@ use App\Mail\WelcomeEmail;
 
 class EmailController extends Controller
 {
-    public function sendWelcomeEmail()
-    {
-        $toEmail='feodor.tjumin.28@gmail.com';
-        $Mailmessage='This is a test email';
-        $subject='Payment Confirmation';
+    // public function sendWelcomeEmail()
+    // {
+    //     $toEmail='feodor.tjumin.28@gmail.com';
+    //     $Mailmessage='This is a test email';
+    //     $subject='Payment Confirmation';
 
-        $response=Mail::to($toEmail)->send(new WelcomeEmail($Mailmessage, $subject)); 
+    //     $response=Mail::to($toEmail)->send(new WelcomeEmail($Mailmessage, $subject)); 
 
-        dd($response);
-    }
+    //     dd($response);
+    // }
 }

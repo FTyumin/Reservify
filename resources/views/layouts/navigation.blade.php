@@ -8,10 +8,9 @@
           <div class="language-select ml-4">
               <form action="{{ route('locale.switch') }}" method="POST">
                   @csrf
-                  <select name="locale" onchange="this.form.submit()" class="form-select">
-                      <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English</option>
-                      <option value="lv" {{ app()->getLocale() == 'lv' ? 'selected' : '' }}>Latvian</option>
-                      <option value="ru" {{ app()->getLocale() == 'ru' ? 'selected' : '' }}>Russian</option>
+                  <select name="locale" onchange="this.form.submit()" class="form-select border border-gray-300 rounded px-3 py-1 focus:outline-none focus:border-blue-500 w-32">                      <option value="en" {{ app()->getLocale() == 'en' ? 'selected' : '' }}>English</option>
+                    <option value="lv" {{ app()->getLocale() == 'lv' ? 'selected' : '' }}>Latvian</option>
+                    <option value="ru" {{ app()->getLocale() == 'ru' ? 'selected' : '' }}>Russian</option>
                   </select>
               </form>
           </div>
