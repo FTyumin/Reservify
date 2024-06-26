@@ -19,7 +19,7 @@ class ReservationController extends Controller
 
     public function create(Hotel $hotel, Room $room)
     {
-        $services = Service::all();
+        $services = Service::where('hotel_id', $hotel->id)->get();
 
         return view('reservations.create', compact('hotel', 'room', 'services'));
     }

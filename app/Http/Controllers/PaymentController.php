@@ -7,6 +7,7 @@ use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PaymentConfirmation;
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
@@ -20,8 +21,9 @@ class PaymentController extends Controller
         foreach ($reservation->services as $service) {
             $totalPrice += $service->price;
         }
+        $today = Carbon::today()->format('Y-m-d');
 
-        return view('payments.create', compact('reservation', 'totalPrice'));
+        return view('payments.create', compact('reservation', 'totalPrice','today'));
     }
 
     public function store(Request $request)
