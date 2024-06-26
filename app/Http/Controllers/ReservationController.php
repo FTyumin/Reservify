@@ -24,28 +24,34 @@ class ReservationController extends Controller
         return view('reservations.create', compact('hotel', 'room', 'services'));
     }
 
-    public function store(Request $request, Hotel $hotel, Room $room)
-    {
-        $validated = $request->validate([
-            'check_in' => 'required|date',
-            'check_out' => 'required|date',
-            'services' => 'nullable|array',
-        ]);
+    public function store(Request $request, $hotelId, $roomId)
+{
+    $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'hotel_id' => 'required|exists:hotels,id',
+        'check_in' => 'required|date|after:today',
+        'check_out' => 'required|date|after:check_in',
+        'services' => 'array|nullable',
+        'services.*' => 'exists:services,id',
+    ]);
 
-        $reservation = Reservation::create([
-            'room_id' => $room->id,
-            'user_id' => $request->user()->id,
-            'check_in' => $validated['check_in'],
-            'check_out' => $validated['check_out'],
-            'hotel_id' => $hotel->id,
-        ]);
+    // Create the reservation
+    $reservation = Reservation::create([
+        'user_id' => $request->user_id,
+        'hotel_id' => $request->hotel_id,
+        'room_id' => $roomId,
+        'check_in' => $request->check_in,
+        'check_out' => $request->check_out,
+    ]);
 
-        if (isset($validated['services'])) {
-            $reservation->services()->sync($validated['services']);
-        }
-
-        return redirect()->route('reservations.show', ['hotel' => $hotel->id, 'reservation'=>$reservation->id])->with('success', 'Reservation created successfully!');
+    // Attach selected services
+    if ($request->has('services')) {
+        $reservation->services()->attach($request->services);
     }
+
+    return redirect()->route('reservations.show', ['hotel' => $hotelId, 'reservation' => $reservation->id])
+                     ->with('success', 'Reservation created successfully.');
+}
 
     public function show(Hotel $hotel, Reservation $reservation)
     {

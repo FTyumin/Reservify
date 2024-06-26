@@ -7,11 +7,16 @@
         <p class="text-gray-600">@lang('messages.location'): {{ $hotel->location }}</p>
         <p class="text-gray-600">@lang('messages.email'): {{ $hotel->email }}</p>
         <p class="text-gray-600">@lang('messages.phone'): {{ $hotel->phone }}</p>
-        @if($averageRating)
-            <p class="text-gray-600 mb-4">@lang('messages.rating'): {{ number_format($averageRating, 1) }} (based on {{ $hotel->reviews->count() }} reviews)</p>
+        @if($hotel->reviews->count()>1)
+            @if($averageRating)
+                <p class="text-gray-600 mb-4">@lang('messages.rating'): {{ number_format($averageRating, 1) }} (based on {{ $hotel->reviews->count() }} reviews)</p>
+            @else
+                <p class="text-gray-600 mb-4">@lang('messages.rating'): {{ $hotel->rating }}</p>
+            @endif
         @else
-            <p class="text-gray-600 mb-4">@lang('messages.rating'): {{ $hotel->rating }}</p>
+        <p class="text-gray-600 mb-4">@lang('messages.rating'): {{ number_format($averageRating, 1) }}
         @endif
+
 
         @if($hotel->image)
             <img src="{{ asset('storage/' . $hotel->image) }}" alt="Hotel Image" class="mt-4 max-w-xs rounded-lg shadow">

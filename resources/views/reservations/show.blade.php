@@ -17,10 +17,12 @@
         <a href="{{ route('contact') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">@lang('messages.Contact_Us')</a>
     </p>
 
+    @if(auth()->check() && auth()->user()->hasRole('admin'))
     <form action="{{ route('reservations.destroy', [$hotel->id, $reservation->id]) }}" method="POST" class="mt-4">
         @csrf
         @method('DELETE')
         <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">@lang('messages.delete')</button>
     </form>
+    @endif	
 </div>
 @endsection
