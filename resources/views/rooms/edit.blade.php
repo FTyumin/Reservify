@@ -18,38 +18,38 @@
         @method('PATCH')
 
         <div class="mb-4">
-            <label for="type" class="block text-gray-700 text-sm font-bold mb-2">Type:</label>
+            <label for="type" class="block text-gray-700 text-sm font-bold mb-2">{{ __('messages.type') }}:</label>
             <input type="text" name="type" id="type" value="{{ $room->type }}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="mb-4">
-            <label for="price" class="block text-gray-700 text-sm font-bold mb-2">Price per night:</label>
+            <label for="price" class="block text-gray-700 text-sm font-bold mb-2">{{ __('messages.price_night') }}:</label>
             <input type="number" name="price" min="0" max="200" id="price" value="{{ $room->price }}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="mb-4">
-            <label for="capacity" class="block text-gray-700 text-sm font-bold mb-2">Capacity:</label>
+            <label for="capacity" class="block text-gray-700 text-sm font-bold mb-2">{{ __('messages.capacity') }}:</label>
             <input type="number" name="capacity" id="capacity" max="5" value="{{ $room->capacity }}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="mb-4">
-            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">{{ __('messages.description') }}:</label>
             <input type="text" name="description" id="description" value="{{ $room->description }}" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="mb-4">
-            <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image:</label>
+            <label for="image" class="block text-gray-700 text-sm font-bold mb-2">{{ __('messages.image') }}:</label>
             <input type="file" name="image" id="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
         </div>
         
         <div class="mb-4">
-            <label for="is_available" class="block text-gray-700 text-sm font-bold mb-2">Available:</label>
+            <label for="is_available" class="block text-gray-700 text-sm font-bold mb-2">{{ __('messages.available') }}:</label>
             <input type="checkbox" name="is_available" id="is_available" value="1" {{ $room->is_available ? 'checked' : '' }} class="mr-2 leading-tight">
             <span class="text-sm">Yes</span>
         </div>
         
         <div class="flex items-center justify-between">
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Update</button>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">{{ __('messages.update') }}</button>
         </div>
     </form>
 @endsection

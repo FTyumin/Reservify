@@ -9,6 +9,10 @@ return [
     'show_rooms'=>'Show Rooms',
     'show_reviews'=>'Show Reviews',
     'create_room'=>'Create Room',
+    'rooms'=>'Rooms',
+    'edit_room'=>'Edit Room',
+
+    'rooms_details'=>'Rooms Details',
 
     'create_service'=>'Create Service',
     'edit_service'=>'Edit Service',
@@ -19,6 +23,8 @@ return [
     'delete_hotel' => 'Delete Hotel',
     'update_hotel' => 'Update Hotel',
 
+    'return_hotel'=>'Return to Hotel List',
+
     'correct_errors'=>'Please correct the following errors:',
 
     'create'=>'Create',
@@ -27,6 +33,9 @@ return [
     'update'=>'Update',
 
     'active'=>'Active',
+    'availability'=>'Availability',
+    'inactive'=>'Inactive',
+    'available'=>'Available',
 
 
     'rating'=>'Rating',
@@ -59,10 +68,17 @@ return [
     'check_in'=>'Check In Date',
     'check_out'=>'Check Out Date',
 
+    'capacity'=>'Capacity',
+
+    'description'=>'Description',
+
+    'create'=>'Create',
     'yes'=>'Yes',
     'no'=>'No',
 
     'book_now'=>'Book Now',
+
+    'type'=>'Type',
 
 
 
