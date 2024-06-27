@@ -30,7 +30,7 @@ class PaymentController extends Controller
     {
         $request->validate([
             'reservation_id' => 'required|exists:reservations,id',
-            'amount' => 'required|integer|min:0',
+            'amount' => 'required|integer|min:1',
             'date' => 'required|date',
             'credit_card_number' => 'required|string',
             'expiry_date' => 'required|string',
