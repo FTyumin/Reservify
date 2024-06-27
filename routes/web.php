@@ -34,7 +34,6 @@ Route::middleware(['auth'])->group(function () {
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::post('/locale-switch', [LocaleController::class, 'switch'])->name('locale.switch');
 
 
     Route::get('/reservations/{reservation}/payment/create', [PaymentController::class, 'create'])->name('payments.create');
@@ -141,6 +140,7 @@ Route::get('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'show'])->nam
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::post('/locale-switch', [LocaleController::class, 'switch'])->name('locale.switch');
 
 
 // Hotels
