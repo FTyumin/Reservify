@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use App\Models\Hotel;
 
 class RegisteredUserController extends Controller
 {
@@ -44,7 +45,9 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
+        $hotels = Hotel::with('reviews')->get();
+        
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect()->route('myprofile.show');
     }
 }

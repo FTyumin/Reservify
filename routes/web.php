@@ -21,9 +21,13 @@ use PharIo\Manifest\Email;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/hotels', function () {
+    return view('hotels.index');
+})->middleware(['auth', 'verified'])->name('hotels.index');
+
+Route::get('/hotels', function () {
+    return view('hotels.index');
+});
 
 
 
@@ -143,14 +147,7 @@ Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/locale-switch', [LocaleController::class, 'switch'])->name('locale.switch');
 
 
-// Hotels
-// Route::get('/hotels', [HotelController::class, 'store'])->middleware('auth');
 
-// Route::get('/hotels/create',[HotelController::class, 'create'])->middleware('auth');
-
-// Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
-
-// Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->middleware('auth');
 
 
 
