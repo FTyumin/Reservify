@@ -20,4 +20,9 @@ class PageController extends Controller
     {
         return view('myprofile');
     }
+
+    public function dashboard()
+    {
+        return view('dashboard');
+    }
 }

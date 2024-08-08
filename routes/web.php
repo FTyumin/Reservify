@@ -12,12 +12,9 @@ use App\Http\Controllers\EmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CleaningScheduleController;
-use Illuminate\Support\Facades\Session;
+
 use App\Http\Controllers\LocaleController;
-use App\Mail\PaymentConfirmation;
-use App\Models\Payment;
-use Illuminate\Support\Facades\Mail;
-use PharIo\Manifest\Email;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
 
@@ -34,10 +31,7 @@ Route::get('/hotels', function () {
 
 
 Route::middleware(['auth'])->group(function () {
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
+    
 
 
     Route::get('/reservations/{reservation}/payment/create', [PaymentController::class, 'create'])->name('payments.create');
@@ -130,21 +124,15 @@ Route::middleware(['auth'])->group(function () {
 
 
 
-// Route::middleware(['auth', 'admin'])->group(function () {
-//     Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
-//     Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
-//     Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
-//     Route::patch('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
-//     Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotels.destroy');
-// });
-
-
 Route::get('/hotels/{hotel}', [HotelController::class, 'show'])->name('hotels.show');
 Route::get('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/locale-switch', [LocaleController::class, 'switch'])->name('locale.switch');
+Route::get('/dashboard', function () {
+    return view('dashboard'); 
+})->name('dashboard');
 
 
 
