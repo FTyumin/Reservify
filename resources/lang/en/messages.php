@@ -55,6 +55,7 @@ return [
     'payment_successful' => 'Payment successful',
     'make_payment' => 'Make Payment',
     'logout' => 'Logout',
+    'login'=>'Login',
     'create_payment' => 'Create Payment',
     'total_price' => 'Total Price',
     'date' => 'Date',
