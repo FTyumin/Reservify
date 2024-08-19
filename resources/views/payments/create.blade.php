@@ -29,7 +29,7 @@
 
         <div class="mb-4">
             <label for="expiry_date" class="block text-sm font-medium text-gray-700">@lang('messages.expiry_date') (MM/YY)</label>
-            <input type="text" id="expiry_date" name="expiry_date" value="{{ old('expiry_date') }}" class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="MM/YY" required>
+            <input type="text" id="expiry_date" name="expiry_date" value="{{ old('expiry_date') }}"  class="mt-1 p-2 border border-gray-300 rounded-md w-full" placeholder="MM/YY" maxlength="5" required>
             @error('expiry_date')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
             @enderror
@@ -51,7 +51,9 @@
             @enderror
         </div>
 
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">@lang('messages.create_payment')</button>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            @lang('messages.create_payment')
+        </button>
     </form>
 </div>
 
@@ -79,6 +81,19 @@
             alert('Invalid year in expiry date. The year cannot be less than the current year);
             event.preventDefault();
         }
+
+        const expiryInput = document.getElementById('expiry_date);
+
+        expityInput.addEventListener('input', function(e){
+            let value = this.value.replace(\/D/g,''); // Remove non-digit characters
+            if(value.length>=3){
+                this.value = value.slice(0,2) + '/' + value.slice(2, 4); // Insert '/'
+            } else{
+                this.value = value;
+            }
+        })
+
+
     });
 </script>
 @endsection
