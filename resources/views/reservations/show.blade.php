@@ -9,7 +9,12 @@
         <p><strong>@lang('messages.room_type'):</strong> {{ $reservation->room->type }}</p>
         <p><strong>@lang('messages.check_in'):</strong> {{ $reservation->check_in }}</p>
         <p><strong>@lang('messages.check_out'):</strong> {{ $reservation->check_out }}</p>
+        @if($reservation->service)
         <p><strong>@lang('messages.services'):</strong> {{ $reservation->service }}</p>
+
+        @else
+        <p><strong>@lang('messages.no_services')</strong></p>
+        @endif
     </div>
 
     <p class="text-gray-700 leading-relaxed mb-4">

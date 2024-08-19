@@ -154,6 +154,7 @@ return [
     'services' => 'Pakalpojumi',
     'create_new_service' => 'Izveidot jaunu pakalpojumu',
     'service_details' => 'Pakalpojuma informācija',
+    'no_services' =>'Neviens pakalpojums nebija izvēlēts',
     'name' => 'Nosaukums',
     'description' => 'Apraksts',
     'price' => 'Cena',

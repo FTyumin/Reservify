@@ -153,6 +153,7 @@ return [
     'services' => 'Services',
     'create_new_service' => 'Create New Service',
     'service_details' => 'Service Details',
+    'no_services' =>'No services were selected',
     'name' => 'Name',
     'description' => 'Description',
     'price' => 'Price',

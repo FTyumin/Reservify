@@ -56,21 +56,27 @@
 </div>
 
 <script>
+    let today=new Date();
+    let year = today.getFullYear();
+    let month = today.getMonth()+1;
+    let day = today.getDate();
     document.getElementById('payment-form').addEventListener('submit', function(event) {
         const expiryDateInput = document.getElementById('expiry_date').value;
-        const [month, year] = expiryDateInput.split('/').map(Number);
-        if(year==2024){
-            if(month<5){
+        const [inputMonth, inputYear] = expiryDateInput.split('/').map(Number);
+        if(inputYear<year){
+            if(inputMonth<month){
                 alert('Invalid expiry date. The card has expired.');
                 event.preventDefault();
             }
         }
 
+        
+
         if (month < 1 || month > 12) {
             alert('Invalid month in expiry date. Please enter a month between 01 and 12.');
             event.preventDefault();
-        } else if (year < 2024) {
-            alert('Invalid year in expiry date. The year cannot be less than 2024.');
+        } else if (inputYear < year) {
+            alert('Invalid year in expiry date. The year cannot be less than the current year);
             event.preventDefault();
         }
     });

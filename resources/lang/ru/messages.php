@@ -151,6 +151,7 @@ return [
     'services' => 'Услуги',
     'create_new_service' => 'Создать Новую Услугу',
     'service_details' => 'Детали Услуги',
+    'no_services' =>'Ни одна услуга не была выбрана',
     'name' => 'Название',
     'description' => 'Описание',
     'price' => 'Цена',
