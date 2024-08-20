@@ -1,0 +1,27 @@
+// styles for credit card expiry date input
+/* .exp {
+    position: relative;
+    border: 1px solid #aaa;
+    display: flex;
+    width: 300px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 24px;
+} */
+
+/* .exp:after {
+    content: '/';
+    position: absolute;
+    left: 50%;
+    color: #aaa;
+}
+
+input.exp {
+    float: left;
+    font-family: monospace;
+    border: 0;
+    width: 18px;
+    outline: none;
+    appearance: none;
+    font-size: 14px;
+} */

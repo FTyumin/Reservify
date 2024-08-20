@@ -22,21 +22,26 @@
 
         <div class="mb-4">
             <label for="credit_card_number"
-             class="block text-sm font-medium text-gray-700">@lang('messages.credit_card_number')</label>
+             class="block text-sm font-medium text-gray-700">@lang('messages.credit_card_number')
+            </label>
             <input type="text" id="credit_card_number"
              minlength="16" maxlength="19" name="credit_card_number" value="{{ old('credit_card_number') }}"
              placeholder="1234 5678 9012 3456"
                class="mt-1 p-2 border border-gray-300 rounded-md w-max-content" required>
+
             @error('credit_card_number')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
             @enderror
         </div>
 
-        <div class="mb-4">
-            <label for="expiry_date" class="block text-sm font-medium">Expiry Date (MM/YY):</label>
-<input type="text" id="expiry_date" name="expiry_date"
- placeholder="MM/YY" pattern="(0[1-9]|1[0-2])\/?([0-9]{2})" maxlength="5" required>
+        <div class="exp">
+            <label for="expiry_month" class="block text-sm font-medium">Expiry Date (MM/YY):</label>
+            <input autocomplete="off" class="exp" id="month" maxlength="2" pattern="[0-9]*"
+             inputmode="numerical" placeholder="MM" type="text" data-pattern-validate required/>
 
+             <label for="expiry_year" class="block text-sm font-medium">Expiry Date (MM/YY):</label>
+             <input autocomplete="off" class="exp" id="year" maxlength="2" pattern="[0-9]*"
+              inputmode="numerical" placeholder="YY" type="text" data-pattern-validate required/>
             @error('expiry_date')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
             @enderror
@@ -106,16 +111,16 @@
     });
 
     // Correctly add the input event listener for formatting
-    const expiryInput = document.getElementById('expiry_date');
+    // const expiryInput = document.getElementById('expiry_date');
 
-    expiryInput.addEventListener('input', function(e) {
-        let value = this.value.replace(/\D/g, ''); // Remove non-digit characters
-        if (value.length > 2) {
-            value = value.slice(0, 2) + '/' + value.slice(2); // Insert '/'
-        } else {
-            this.value = value;
-        }
-    });
+    // expiryInput.addEventListener('input', function(e) {
+    //     let value = this.value.replace(/\D/g, ''); // Remove non-digit characters
+    //     if (value.length > 2) {
+    //         value = value.slice(0, 2) + '/' + value.slice(2); // Insert '/'
+    //     } else {
+    //         this.value = value;
+    //     }
+    // });
 
     const cardNumberInput = document.getElementById('credit_card_number');
 
