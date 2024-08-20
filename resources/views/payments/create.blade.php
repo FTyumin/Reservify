@@ -13,14 +13,16 @@
         
         <div class="mb-4">
             <label for="date" class="block text-sm font-medium text-gray-700">@lang('messages.date')</label>
-            <input type="text" id="date" name="date" value="{{ $today }}" class="mt-1 p-2 border border-gray-300 rounded-md w-max-content" readonly required>
+            <input type="text" id="date" name="date" value="{{ $today }}"
+             class="mt-1 p-2 border border-gray-300 rounded-md w-max-content" readonly required>
             @error('date')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
             @enderror
         </div>
 
         <div class="mb-4">
-            <label for="credit_card_number" class="block text-sm font-medium text-gray-700">@lang('messages.credit_card_number')</label>
+            <label for="credit_card_number"
+             class="block text-sm font-medium text-gray-700">@lang('messages.credit_card_number')</label>
             <input type="text" id="credit_card_number"
              minlength="16" maxlength="19" name="credit_card_number" value="{{ old('credit_card_number') }}"
              placeholder="1234 5678 9012 3456"
@@ -42,7 +44,8 @@
 
         <div class="mb-4">
             <label for="cvv" class="block text-sm font-medium text-gray-700">@lang('messages.cvv')</label>
-            <input type="text" id="cvv" name="cvv" value="{{ old('cvv') }}" maxlength="4" class="mt-1 p-2 border border-gray-300 rounded-md w-max-content" required>
+            <input type="text" id="cvv" name="cvv" value="{{ old('cvv') }}" placeholder="123"
+            maxlength="4" class="mt-1 p-2 border border-gray-300 rounded-md w-max-content" required>
             @error('cvv')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
             @enderror
@@ -50,7 +53,8 @@
 
         <div class="mb-4">
             <label for="email" class="block text-sm font-medium text-gray-700">@lang('messages.email')</label>
-            <input type="email" id="email" name="email" value="{{ old('email') }}" class="mt-1 p-2 border border-gray-300 rounded-md w-max-content" required>
+            <input type="email" id="email" name="email" value="{{ old('email') }}"
+             class="mt-1 p-2 border border-gray-300 rounded-md w-max-content" required>
             @error('email')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
             @enderror
@@ -63,6 +67,25 @@
 </div>
 
 <script>
+
+    // function to format credit card input, from stackoverflow
+    function cc_format(value) {
+            var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            var matches = v.match(/\d{4,16}/g);
+            var match = (matches && matches[0]) || '';
+            var parts = [];
+
+            for (var i = 0, len = match.length; i < len; i += 4) {
+                parts.push(match.substring(i, i + 4));
+            }
+
+            if (parts.length) {
+                return parts.join(' ');
+            } else {
+                return value;
+            }
+        }
+
     let today = new Date();
     let year = today.getFullYear();
     let month = today.getMonth() + 1;
@@ -79,10 +102,7 @@
         } else if (inputMonth < 1 || inputMonth > 12) {
             alert('Invalid month in expiry date. Please enter a month between 01 and 12.');
             event.preventDefault();
-        } else if (inputYear < year) {
-            alert('Invalid year in expiry date. The year cannot be less than the current year.');
-            event.preventDefault();
-        }
+        } 
     });
 
     // Correctly add the input event listener for formatting
@@ -99,14 +119,12 @@
 
     const cardNumberInput = document.getElementById('credit_card_number');
 
+    
     cardNumberInput.addEventListener('input', function(e) {
-        let value = this.value;
-        // add space after every 4 digits
-        value = value.replace(/(.{4})/g, '$1 ');
-        // remove space at the end
-        this.value = value.trim();
+        this.value = cc_format(this.value);
     })
-
+        
+    
     cardNumberInput.addEventListener('keydown', function(e){
         if(e.key === 'Backspace' && this.value.endsWith(' ')){
             this.value = this.value.slice(0,-1);
