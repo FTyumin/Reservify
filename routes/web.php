@@ -18,6 +18,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
 
+
+
 Route::get('/hotels', function () {
     return view('hotels.index');
 })->middleware(['auth', 'verified'])->name('hotels.index');
@@ -27,7 +29,15 @@ Route::get('/hotels', function () {
 });
 
 
+// Route::middleware('admin')->prefix('admin')->group(function () {
+//     Route::resource('users', 'Admin\UserController');
+//     Route::resource('reservations', 'Admin\ReservationController');
+//     Route::get('/dashboard',function() {
+//         return view('dashboard');
+//     } );
+// });
 
+Route::get('/dashboard',('admin.dashboard') );
 
 
 Route::middleware(['auth'])->group(function () {
@@ -46,8 +56,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
     Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotels.destroy');
 
-    // Route::middleware(['admin'])->group(function () {
-        
+
 
         
         //rooms
@@ -109,8 +118,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/hotels/{hotel}/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
 
     // reservations
-// routes/web.php
-
 
     Route::get('/hotels/{hotel}/rooms/{room}/cleaning-schedules', [CleaningScheduleController::class, 'index'])->name('cleaning_schedules.index');
     Route::get('/hotels/{hotel}/rooms/{room}/cleaning-schedules/create', [CleaningScheduleController::class, 'create'])->name('cleaning_schedules.create');
@@ -119,7 +126,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/hotels/{hotel}/rooms/{room}/cleaning-schedules/{cleaningSchedule}/edit', [CleaningScheduleController::class, 'edit'])->name('cleaning_schedules.edit');
     Route::patch('/hotels/{hotel}/rooms/{room}/cleaning-schedules/{cleaningSchedule}', [CleaningScheduleController::class, 'update'])->name('cleaning_schedules.update');
     Route::delete('/hotels/{hotel}/rooms/{room}/cleaning-schedules/{cleaningSchedule}', [CleaningScheduleController::class, 'destroy'])->name('cleaning_schedules.destroy');
-// });
+
 
 
 
@@ -130,9 +137,9 @@ Route::get('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'show'])->nam
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/locale-switch', [LocaleController::class, 'switch'])->name('locale.switch');
-Route::get('/dashboard', function () {
-    return view('dashboard'); 
-})->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard'); 
+// })->name('dashboard');
 
 
 
