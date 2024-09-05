@@ -12,13 +12,14 @@ use App\Http\Controllers\EmailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\CleaningScheduleController;
-
+use App\Http\Controllers\AuthenticatedSessionController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Middleware\Authenticate;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
 
-
+Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
 
 Route::get('/hotels', function () {
     return view('hotels.index');
@@ -29,20 +30,6 @@ Route::get('/hotels', function () {
 });
 
 
-// Route::middleware('admin')->prefix('admin')->group(function () {
-//     Route::resource('users', 'Admin\UserController');
-//     Route::resource('reservations', 'Admin\ReservationController');
-//     Route::get('/dashboard',function() {
-//         return view('dashboard');
-//     } );
-// });
-
-// Route::get('/dashboard',('admin.dashboard') );
-
-// Route::group(['middleware' => ['App\Http\Middleware\Adminmiddleware']], function () {
-//     //admin routes
-    
-// });
 
 Route::middleware('can:admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware(['auth', 'admin'])->name('admin.dashboard');
@@ -136,20 +123,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/hotels/{hotel}/rooms/{room}/cleaning-schedules/{cleaningSchedule}', [CleaningScheduleController::class, 'destroy'])->name('cleaning_schedules.destroy');
 
 
-
-
-
 Route::get('/hotels/{hotel}', [HotelController::class, 'show'])->name('hotels.show');
 Route::get('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'show'])->name('rooms.show');
 
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/locale-switch', [LocaleController::class, 'switch'])->name('locale.switch');
-// Route::get('/dashboard', function () {
-//     return view('dashboard'); 
-// })->name('dashboard');
-
-
 
 
 

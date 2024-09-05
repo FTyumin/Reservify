@@ -8,6 +8,8 @@
           @if(Auth::check())
             <a href="{{ route('myprofile.show') }}" class="text-gray-600 hover:text-gray-800">{{ __('messages.my_profile') }}</a>
           
+          @elseif(Auth::check() && Auth::user()->role==='admin')
+          <a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-gray-800">{{ dashboard }}</a>
           @else
             <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-800">{{ __('messages.login') }}</a>
           

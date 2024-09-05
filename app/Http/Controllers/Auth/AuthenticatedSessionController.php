@@ -44,4 +44,13 @@ class AuthenticatedSessionController extends Controller
 
         return redirect('/');
     }
+
+    protected function redirectTo() 
+    {
+        if(Auth::user()->role==='admin') {
+            return '/dashboard';
+        }
+
+        return '/home';
+    }
 }
