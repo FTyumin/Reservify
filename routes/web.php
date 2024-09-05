@@ -37,8 +37,16 @@ Route::get('/hotels', function () {
 //     } );
 // });
 
-Route::get('/dashboard',('admin.dashboard') );
+// Route::get('/dashboard',('admin.dashboard') );
 
+// Route::group(['middleware' => ['App\Http\Middleware\Adminmiddleware']], function () {
+//     //admin routes
+    
+// });
+
+Route::middleware('can:admin')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware(['auth', 'admin'])->name('admin.dashboard');
+});
 
 Route::middleware(['auth'])->group(function () {
     
