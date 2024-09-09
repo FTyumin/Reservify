@@ -48,6 +48,6 @@ class RegisteredUserController extends Controller
         $hotels = Hotel::with('reviews')->get();
         
 
-        return redirect()->route('myprofile.show');
+        return redirect()->route('/home');
     }
 }

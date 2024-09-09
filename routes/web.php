@@ -18,6 +18,7 @@ use App\Http\Middleware\Authenticate;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
+Route::get('/', [HotelController::class, 'index'])->name('/home');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
 
