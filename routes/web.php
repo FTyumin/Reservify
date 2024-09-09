@@ -1,21 +1,18 @@
 <?php
-
-use App\Http\Controllers\HotelController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RoomController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\ServiceController;
-use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\EmailController;
+use App\Http\Middleware\Authenticate;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\CleaningScheduleController;
-use App\Http\Controllers\AuthenticatedSessionController;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HotelController;
 use App\Http\Controllers\LocaleController;
-use App\Http\Middleware\Authenticate;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\CleaningScheduleController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
 Route::get('/', [HotelController::class, 'index'])->name('/home');
@@ -32,36 +29,30 @@ Route::get('/hotels', function () {
 
 
 
-Route::middleware('can:admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'dashboard'])->middleware(['auth', 'admin'])->name('admin.dashboard');
-});
+// Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('admin.dashboard');
+// });
+
 
 Route::middleware(['auth'])->group(function () {
     
-
-
     Route::get('/reservations/{reservation}/payment/create', [PaymentController::class, 'create'])->name('payments.create');
     Route::post('/reservations/payment/store', [PaymentController::class, 'store'])->name('payments.store');
 
     Route::get('/myprofile', [ProfileController::class, 'show'])->name('myprofile.show');
 
-        
     Route::get('/hotels/create', [HotelController::class, 'create'])->name('hotels.create');
     Route::post('/hotels', [HotelController::class, 'store'])->name('hotels.store');
     Route::get('/hotels/{hotel}/edit', [HotelController::class, 'edit'])->name('hotels.edit');
     Route::patch('/hotels/{hotel}', [HotelController::class, 'update'])->name('hotels.update');
     Route::delete('/hotels/{hotel}', [HotelController::class, 'destroy'])->name('hotels.destroy');
 
-
-
-        
         //rooms
         Route::get('/hotels/{hotel}/rooms/create', [RoomController::class, 'create'])->name('rooms.create');
         Route::post('/hotels/{hotel}/rooms', [RoomController::class, 'store'])->name('rooms.store');
         Route::get('/hotels/{hotel}/rooms/{room}/edit', [RoomController::class, 'edit'])->name('rooms.edit');
         Route::patch('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'update'])->name('rooms.update');
         Route::delete('/hotels/{hotel}/rooms/{room}', [RoomController::class, 'destroy'])->name('rooms.destroy');
-        
         
         //reservations
         Route::prefix('hotels/{hotel}')->group(function () {
@@ -81,7 +72,7 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/reviews/{review}', [ReviewController::class, 'update'])->name('reviews.update');
         Route::delete('/reviews/{review}', [ReviewController::class, 'destroy'])->name('reviews.destroy');
 
-        Route::get('/hotels/{hotel}/services', [ServiceController::class, 'index'])->name('services.index');
+    Route::get('/hotels/{hotel}/services', [ServiceController::class, 'index'])->name('services.index');
     Route::get('/hotels/{hotel}/services/create', [ServiceController::class, 'create'])->name('services.create');
     Route::post('/hotels/{hotel}/services', [ServiceController::class, 'store'])->name('services.store');
     Route::get('/hotels/{hotel}/services/{service}', [ServiceController::class, 'show'])->name('services.show');
@@ -114,7 +105,6 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/hotels/{hotel}/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
 
     // reservations
-
     Route::get('/hotels/{hotel}/rooms/{room}/cleaning-schedules', [CleaningScheduleController::class, 'index'])->name('cleaning_schedules.index');
     Route::get('/hotels/{hotel}/rooms/{room}/cleaning-schedules/create', [CleaningScheduleController::class, 'create'])->name('cleaning_schedules.create');
     Route::post('/hotels/{hotel}/rooms/{room}/cleaning-schedules', [CleaningScheduleController::class, 'store'])->name('cleaning_schedules.store');

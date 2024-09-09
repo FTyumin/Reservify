@@ -3,21 +3,20 @@
   <div class="container mx-auto flex justify-between items-center">
       <a href="/" class="text-3xl text-left font-semibold ">{{ __('messages.reservify') }}</a>
       <div class="space-x-4 flex items-center">
+        @if(Auth::check())
+          @if(Auth::user()->role==='admin')
+                <a href="{{ route('admin.dashboard') }}" class="text-gray-600 hover:text-gray-800"> Dashboard </a>
+          @endif
+        @endif
           <a href="/about" class="text-gray-600 hover:text-gray-800">{{ __('messages.about') }}</a>
           <a href="/contact" class="text-gray-600 hover:text-gray-800">{{ __('messages.contact') }}</a>
           @if(Auth::check())
-            @if(Auth::user()->role==='admin')
-          
-              <a href="{{ route('admin.Dashboard') }}" class="text-gray-600 hover:text-gray-800"> dashboard </a>
-            
-            @else 
             <a href="{{ route('myprofile.show') }}" class="text-gray-600 hover:text-gray-800">{{ __('messages.my_profile') }}</a>
-            @endif
           @else
             <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-800">{{ __('messages.login') }}</a>
-          
-
           @endif
+
+          
           
           <div class="language-select ml-4">
               <form action="{{ route('locale.switch') }}" method="POST">
