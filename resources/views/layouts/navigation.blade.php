@@ -6,10 +6,13 @@
           <a href="/about" class="text-gray-600 hover:text-gray-800">{{ __('messages.about') }}</a>
           <a href="/contact" class="text-gray-600 hover:text-gray-800">{{ __('messages.contact') }}</a>
           @if(Auth::check())
-            <a href="{{ route('myprofile.show') }}" class="text-gray-600 hover:text-gray-800">{{ __('messages.my_profile') }}</a>
+            @if(Auth::user()->role==='admin')
           
-          @elseif(Auth::check() && Auth::user()->role==='admin')
-          <a href="{{ route('dashboard') }}" class="text-gray-600 hover:text-gray-800">{{ dashboard }}</a>
+              <a href="{{ route('admin.Dashboard') }}" class="text-gray-600 hover:text-gray-800"> dashboard </a>
+            
+            @else 
+            <a href="{{ route('myprofile.show') }}" class="text-gray-600 hover:text-gray-800">{{ __('messages.my_profile') }}</a>
+            @endif
           @else
             <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-800">{{ __('messages.login') }}</a>
           
