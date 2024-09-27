@@ -21,14 +21,14 @@
     <p class="text-gray-700 leading-relaxed mt-4">
         @lang('messages.contact_us_grand_royale_hotel')<br>
         @lang('messages.contact_us_grand_royale_address')<br>
-        @lang('messages.Email'): <a href="mailto:@lang('messages.contact_us_grand_royale_email') }}" class="text-blue-500 hover:underline">@lang('messages.contact_us_grand_royale_email')</a><br>
-        @lang('messages.Phone'): <a href="tel:@lang('messages.contact_us_grand_royale_phone') }}" class="text-blue-500 hover:underline">@lang('messages.contact_us_grand_royale_phone')</a>
+        @lang('messages.email'): <a href="mailto:@lang('messages.contact_us_grand_royale_email') }}" class="text-blue-500 hover:underline">@lang('messages.contact_us_grand_royale_email')</a><br>
+        @lang('messages.phone'): <a href="tel:@lang('messages.contact_us_grand_royale_phone') }}" class="text-blue-500 hover:underline">@lang('messages.contact_us_grand_royale_phone')</a>
     </p>
     <p class="text-gray-700 leading-relaxed mt-4">
         @lang('messages.contact_us_oceanview_retreat')<br>
         @lang('messages.contact_us_oceanview_address')<br>
-        @lang('messages.Email'): <a href="mailto:@lang('messages.contact_us_oceanview_email') }}" class="text-blue-500 hover:underline">@lang('messages.contact_us_oceanview_email')</a><br>
-        @lang('messages.Phone'): <a href="tel:@lang('messages.contact_us_oceanview_phone') }}" class="text-blue-500 hover:underline">@lang('messages.contact_us_oceanview_phone')</a>
+        @lang('messages.email'): <a href="mailto:@lang('messages.contact_us_oceanview_email') }}" class="text-blue-500 hover:underline">@lang('messages.contact_us_oceanview_email')</a><br>
+        @lang('messages.phone'): <a href="tel:@lang('messages.contact_us_oceanview_phone') }}" class="text-blue-500 hover:underline">@lang('messages.contact_us_oceanview_phone')</a>
     </p>
     <p class="text-gray-700 leading-relaxed mt-4">
         @lang('messages.contact_us_thank_you')

@@ -13,6 +13,8 @@ class UserController extends Controller
         return view('auth.register');
     }
 
+    
+
 
     // displaying user info
     public function index() {
