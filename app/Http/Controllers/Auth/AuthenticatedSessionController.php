@@ -51,6 +51,6 @@ class AuthenticatedSessionController extends Controller
             return '/home';
         }
 
-        return '/home';
+        return '/';
     }
 }

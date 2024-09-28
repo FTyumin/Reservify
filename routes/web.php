@@ -19,9 +19,9 @@ Route::get('/', [HotelController::class, 'index'])->name('/home');
 
 Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('login');
 
-Route::get('/hotels', function () {
-    return view('hotels.index');
-})->middleware(['auth', 'verified'])->name('hotels.index');
+// Route::get('/hotels', function () {
+//     return view('hotels.index');
+// })->middleware(['auth', 'verified'])->name('hotels.index');
 
 Route::get('/hotels', function () {
     return view('hotels.index');
