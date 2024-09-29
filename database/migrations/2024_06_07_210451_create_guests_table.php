@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone_number');
             $table->string('credit_card_number');
+            $table->string('expiry_date')->nullable();
+            $table->string('cvv')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

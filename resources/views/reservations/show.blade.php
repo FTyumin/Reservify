@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto p-4">
+<div class="container mx-auto p-4 h-full">
     <h1 class="text-2xl font-semibold mb-4">@lang('messages.reservation_details')</h1>
 
-    <div class="bg-white shadow-lg rounded-lg p-4 mb-4">
+    <div class="bg-white shadow-lg rounded-lg p-4 mb-4 flex flex-col justify-between h-3/4" >
         <p><strong>@lang('messages.hotel_name'):</strong> {{ $hotel->name }}</p>
         <p><strong>@lang('messages.room_type'):</strong> {{ $reservation->room->type }}</p>
-        <p><strong>@lang('messages.check_in'):</strong> {{ $reservation->check_in }}</p>
-        <p><strong>@lang('messages.check_out'):</strong> {{ $reservation->check_out }}</p>
+        <p><strong>@lang('messages.check_in'):</strong> {{ $reservation->check_in->format('d/m/Y') }}</p>
+        <p><strong>@lang('messages.check_out'):</strong> {{ $reservation->check_out->format('d/m/Y') }}</p>
         @if($reservation->service)
         <p><strong>@lang('messages.services'):</strong> {{ $reservation->service }}</p>
 

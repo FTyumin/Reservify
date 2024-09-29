@@ -1,12 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto p-4">
+
+<div class="flex items-center flex-col container mx-auto p-4">
+    
+
     <h1 class="text-2xl font-semibold mb-4">@lang('messages.create_payment_for_reservation', ['id' => $reservation->id])</h1>
 
     <p><strong>@lang('messages.total_price'):</strong> {{ $totalPrice }}€</p>
     
-    <form action="{{ route('payments.store') }}" method="POST" id="payment-form">
+    <form action="{{ route('payments.store') }}" method="POST" id="payment-form" class="a">
         @csrf
         <input type="hidden" name="reservation_id" value="{{ $reservation->id }}">
         <input type="hidden" name="amount" value="{{ $totalPrice }}">
@@ -36,11 +39,11 @@
 
         <div class="exp">
             <label for="expiry_month" class="block text-sm font-medium">Expiry Date (MM/YY):</label>
-            <input autocomplete="off" class="exp" id="month" maxlength="2" pattern="[0-9]*"
+            <input autocomplete="off" class="exp" id="expiry_month" maxlength="2" max="12" pattern="[0-9]*"
              inputmode="numerical" placeholder="MM" type="text" data-pattern-validate required/>
 
              <label for="expiry_year" class="block text-sm font-medium">Expiry Date (MM/YY):</label>
-             <input autocomplete="off" class="exp" id="year" maxlength="2" pattern="[0-9]*"
+             <input autocomplete="off" class="exp" id="expiry_year" maxlength="2" max="29" pattern="[0-9]*"
               inputmode="numerical" placeholder="YY" type="text" data-pattern-validate required/>
             @error('expiry_date')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
@@ -70,71 +73,70 @@
         </button>
     </form>
 </div>
-
 <script>
 
-    // function to format credit card input, from stackoverflow
-    function cc_format(value) {
-            var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-            var matches = v.match(/\d{4,16}/g);
-            var match = (matches && matches[0]) || '';
-            var parts = [];
+// function to format credit card input, from stackoverflow
+function cc_format(value) {
+        var v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        var matches = v.match(/\d{4,16}/g);
+        var match = (matches && matches[0]) || '';
+        var parts = [];
 
-            for (var i = 0, len = match.length; i < len; i += 4) {
-                parts.push(match.substring(i, i + 4));
-            }
-
-            if (parts.length) {
-                return parts.join(' ');
-            } else {
-                return value;
-            }
+        for (var i = 0, len = match.length; i < len; i += 4) {
+            parts.push(match.substring(i, i + 4));
         }
 
-    let today = new Date();
-    let year = today.getFullYear();
-    let month = today.getMonth() + 1;
-    let day = today.getDate();
-
-    document.getElementById('payment-form').addEventListener('submit', function(event) {
-        const expiryDateInput = document.getElementById('expiry_date').value;
-        const [inputMonth, inputYear] = expiryDateInput.split('/').map(Number);
-
-        // Validate the expiry date
-        if (inputYear < year || (inputYear === year && inputMonth < month)) {
-            alert('Invalid expiry date. The card has expired.');
-            event.preventDefault();
-        } else if (inputMonth < 1 || inputMonth > 12) {
-            alert('Invalid month in expiry date. Please enter a month between 01 and 12.');
-            event.preventDefault();
-        } 
-    });
-
-    // Correctly add the input event listener for formatting
-    // const expiryInput = document.getElementById('expiry_date');
-
-    // expiryInput.addEventListener('input', function(e) {
-    //     let value = this.value.replace(/\D/g, ''); // Remove non-digit characters
-    //     if (value.length > 2) {
-    //         value = value.slice(0, 2) + '/' + value.slice(2); // Insert '/'
-    //     } else {
-    //         this.value = value;
-    //     }
-    // });
-
-    const cardNumberInput = document.getElementById('credit_card_number');
-
-    
-    cardNumberInput.addEventListener('input', function(e) {
-        this.value = cc_format(this.value);
-    })
-        
-    
-    cardNumberInput.addEventListener('keydown', function(e){
-        if(e.key === 'Backspace' && this.value.endsWith(' ')){
-            this.value = this.value.slice(0,-1);
+        if (parts.length) {
+            return parts.join(' ');
+        } else {
+            return value;
         }
-    })
+    }
+
+let today = new Date();
+let year = today.getFullYear();
+let month = today.getMonth() + 1;
+let day = today.getDate();
+
+document.getElementById('payment-form').addEventListener('submit', function(event) {
+    const expiryDateInput = document.getElementById('expiry_date').value;
+    const [inputMonth, inputYear] = expiryDateInput.split('/').map(Number);
+
+    // Validate the expiry date
+    if (inputYear < year || (inputYear === year && inputMonth < month)) {
+        alert('Invalid expiry date. The card has expired.');
+        event.preventDefault();
+    } else if (inputMonth < 1 || inputMonth > 12) {
+        alert('Invalid month in expiry date. Please enter a month between 01 and 12.');
+        event.preventDefault();
+    } 
+});
+
+// Correctly add the input event listener for formatting
+// const expiryInput = document.getElementById('expiry_date');
+
+// expiryInput.addEventListener('input', function(e) {
+//     let value = this.value.replace(/\D/g, ''); // Remove non-digit characters
+//     if (value.length > 2) {
+//         value = value.slice(0, 2) + '/' + value.slice(2); // Insert '/'
+//     } else {
+//         this.value = value;
+//     }
+// });
+
+const cardNumberInput = document.getElementById('credit_card_number');
+
+
+cardNumberInput.addEventListener('input', function(e) {
+    this.value = cc_format(this.value);
+})
+    
+
+cardNumberInput.addEventListener('keydown', function(e){
+    if(e.key === 'Backspace' && this.value.endsWith(' ')){
+        this.value = this.value.slice(0,-1);
+    }
+})
 </script>
 
 @endsection

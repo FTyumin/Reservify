@@ -1,3 +1,5 @@
+<?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Guest;
@@ -44,6 +46,8 @@ class GuestController extends Controller
             'email' => $request->email,
             'phone_number' => $request->phone_number,
             'credit_card_number' => $request->credit_card_number,
+            'expiry_date'=>$request->expiry_date,
+            'cvv'=>$request->cvv
         ]);
 
         return redirect()->route('guests.index')->with('success', 'Guest created successfully.');

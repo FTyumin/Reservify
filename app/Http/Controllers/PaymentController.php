@@ -49,6 +49,15 @@ class PaymentController extends Controller
             'email' => $request->email,
         ]);
 
+        $user = auth()->user;
+        $guest = \App\Models\Guest::firstOrNew(['user_id' => $user->id]);
+        $guest->credit_card_number = $request->credit_card_number;
+        $guest->expiry_date = $request->expiry_date;
+        $guest->cvv = $request->cvv;
+        $guest->save();
+
+
+
         // Send confirmation email
         Mail::to($request->email)->send(new PaymentConfirmation($payment));
         $paidReservations = session()->get('paid_reservations', []);
