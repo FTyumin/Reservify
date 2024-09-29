@@ -39,15 +39,12 @@
 
         <div class="exp">
             <label for="expiry_month" class="block text-sm font-medium">Expiry Date (MM/YY):</label>
-            <input autocomplete="off" class="exp" id="expiry_month" maxlength="2" max="12" pattern="[0-9]*"
+            <input autocomplete="off" class="exp" id="expiry_month" name="expiry_month" maxlength="2" max="12" pattern="[0-9]*"
              inputmode="numerical" placeholder="MM" type="text" data-pattern-validate required/>
 
              <label for="expiry_year" class="block text-sm font-medium">Expiry Date (MM/YY):</label>
-             <input autocomplete="off" class="exp" id="expiry_year" maxlength="2" max="29" pattern="[0-9]*"
-              inputmode="numerical" placeholder="YY" type="text" data-pattern-validate required/>
-            @error('expiry_date')
-                <p class="text-red-500 mt-1">{{ $message }}</p>
-            @enderror
+             <input autocomplete="off" class="exp" id="expiry_year" name="year" maxlength="4" max="29" pattern="[0-9]*"
+              inputmode="numerical" placeholder="YYYY" type="text" data-pattern-validate required/>
         </div>
 
         <div class="mb-4">
@@ -99,14 +96,21 @@ let month = today.getMonth() + 1;
 let day = today.getDate();
 
 document.getElementById('payment-form').addEventListener('submit', function(event) {
-    const expiryDateInput = document.getElementById('expiry_date').value;
-    const [inputMonth, inputYear] = expiryDateInput.split('/').map(Number);
+    const expiryMonth = document.getElementById('expiry_month').value;
+    const expiryYear = document.getElementById('expiry_year').value;
+    const expiryDateInput = `${expiryMonth}/${expiryYear}`;
+    const expiryDateHiddenField = document.createElement('input');
+    expiryDateHiddenField.setAttribute('type', 'hidden');
+    expiryDateHiddenField.setAttribute('name', 'expiry_date');
+    expiryDateHiddenField.setAttribute('value', expiryDateInput);
+
+    this.appendChild(expiryDateHiddenField);
 
     // Validate the expiry date
-    if (inputYear < year || (inputYear === year && inputMonth < month)) {
+    if (expiryYear < year || (expiryYear === year && expiryMonth < month)) {
         alert('Invalid expiry date. The card has expired.');
         event.preventDefault();
-    } else if (inputMonth < 1 || inputMonth > 12) {
+    } else if (expiryMonth < 1 || expiryMonth > 12) {
         alert('Invalid month in expiry date. Please enter a month between 01 and 12.');
         event.preventDefault();
     } 

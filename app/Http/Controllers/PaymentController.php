@@ -49,7 +49,7 @@ class PaymentController extends Controller
             'email' => $request->email,
         ]);
 
-        $user = auth()->user;
+        $user = $request->user();
         $guest = \App\Models\Guest::firstOrNew(['user_id' => $user->id]);
         $guest->credit_card_number = $request->credit_card_number;
         $guest->expiry_date = $request->expiry_date;
