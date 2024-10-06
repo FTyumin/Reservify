@@ -23,7 +23,22 @@ class PaymentController extends Controller
         }
         $today = Carbon::today()->format('Y-m-d');
 
-        return view('payments.create', compact('reservation', 'totalPrice','today'));
+        $reservation = Reservation::with('guest')->findOrFail($reservation_id);
+        $user = auth()->user();
+        $creditCardNumber = null;
+        $expiryDate = null;
+        $expiryMonth=null;
+
+
+        if ($reservation->guest && $reservation->guest->credit_card_number) {
+            $creditCardNumber = $reservation->guest->credit_card_number;
+            $expiryDate = $reservation->guest->expiry_date;
+        } elseif ($user && $user->credit_card_number) {
+            // Fallback to user's credit card number
+            $creditCardNumber = $user->credit_card_number;
+        }
+
+        return view('payments.create', compact('reservation', 'totalPrice','today','creditCardNumber'));
     }
 
     public function store(Request $request)
@@ -55,7 +70,6 @@ class PaymentController extends Controller
         $guest->expiry_date = $request->expiry_date;
         $guest->cvv = $request->cvv;
         $guest->save();
-
 
 
         // Send confirmation email

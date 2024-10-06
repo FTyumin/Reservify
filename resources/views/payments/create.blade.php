@@ -28,10 +28,11 @@
              class="block text-sm font-medium text-gray-700">@lang('messages.credit_card_number')
             </label>
             <input type="text" id="credit_card_number"
-             minlength="16" maxlength="19" name="credit_card_number" value="{{ old('credit_card_number') }}"
+             minlength="16" maxlength="19" name="credit_card_number" 
+             value="{{ $creditCardNumber }}"
              placeholder="1234 5678 9012 3456"
                class="mt-1 p-2 border border-gray-300 rounded-md w-max-content" required>
-
+               
             @error('credit_card_number')
                 <p class="text-red-500 mt-1">{{ $message }}</p>
             @enderror
