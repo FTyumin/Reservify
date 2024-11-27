@@ -8,7 +8,7 @@
         <p class="text-2xl"><strong>@lang('messages.user_name'):</strong> {{ auth()->user()->name }}</p>
         <p class="text-2xl"><strong>@lang('messages.email'):</strong> {{ auth()->user()->email }}</p>
     </div>
-    @if(session('success'))
+    @if(session('success'))  
         <div class="bg-green-200  text-green-800 border-green-300 border px-4 py-2 mb-4 rounded-md">
             {{ session('success') }}
         </div>

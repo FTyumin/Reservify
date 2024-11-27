@@ -55,7 +55,7 @@ class HotelSeeder extends Seeder
                 'phone' => '123-456-7894',
                 'description' => 'A beautiful hotel with a view of the ocean.',
                 'rating' => 5,
-                'image' => 'images/hotels/hotel4.webp',
+                'image' => 'images/hotels/hotel3.webp',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
