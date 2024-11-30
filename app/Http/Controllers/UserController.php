@@ -13,16 +13,12 @@ class UserController extends Controller
         return view('auth.register');
     }
 
-    
+    // displaying users for admin
+    // public function index() {
+    //     $users = User::all();
+    //     return view('admin.dashboard', ['user' => 'Fedja']);
+    // }
 
-
-    // displaying user info
-    public function index() {
-        $users = User::all();
-        return view('dashboard', compact('users'));
-    }
-
-    // editing a user
     public function edit($id) {
         $user = User::findOrFail($id);
         return view('admin.users.edit', compact('user'));
@@ -34,7 +30,6 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success','User updated successfully');
     }
 
-    // deleting a user
     public function destroy($id)
     {
         $user = User::findOrFail($id);
@@ -42,6 +37,4 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('success', 'User deleted successfully');
     }
 
-
-    
 }
