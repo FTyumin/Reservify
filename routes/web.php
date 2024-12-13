@@ -30,8 +30,8 @@ Route::get('/hotels', function () {
 
 // Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
-    Route::get('/users/{user}/delete', [UserController::class, 'delete'])->name('admin.users.destroy');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::get('/users/{user}/delete', [UserController::class, 'delete'])->name('users.destroy');
 // });
 
 

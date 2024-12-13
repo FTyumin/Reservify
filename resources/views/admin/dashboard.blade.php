@@ -21,8 +21,8 @@
                         <td class="px-6 py-4">{{ $user->name }}</td>
                         <td class="px-6 py-4">{{ $user->email }}</td>
                         <td class="px-6 py-4">
-                            <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('admin.users.destroy', $user->id) }}" method="POST" style="display:inline-block;">
+                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline-block;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger text-red-500 ml-4" onclick="return confirm('Are you sure?')">Delete</button>

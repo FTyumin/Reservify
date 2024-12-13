@@ -13,15 +13,11 @@ class UserController extends Controller
         return view('auth.register');
     }
 
-    // displaying users for admin
-    // public function index() {
-    //     $users = User::all();
-    //     return view('admin.dashboard', ['user' => 'Fedja']);
-    // }
 
     public function edit($id) {
         $user = User::findOrFail($id);
-        return view('admin.users.edit', compact('user'));
+        $name = $user->name;
+        return view('users.edit', ['user' => $user,'name' =>$name ]);
     }
 
     public function update(Request $request, $id) {
@@ -34,7 +30,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully');
+        return redirect()->route('admin.dashboard')->with('success', 'User deleted successfully');
     }
 
 }
