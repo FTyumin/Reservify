@@ -13,6 +13,7 @@ use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\CleaningScheduleController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
 Route::get('/', [HotelController::class, 'index'])->name('/home');
@@ -28,10 +29,13 @@ Route::get('/hotels', function () {
 
 
 // Route::middleware(['auth', 'admin'])->group(function () {
-    
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::get('/users/{user}/delete', [UserController::class, 'delete'])->name('admin.users.destroy');
 // });
 
-Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+
 
 // Route::get('/dashboard', function () {
 //     return view('admin.dashboard',['user' => 'fedja']);
