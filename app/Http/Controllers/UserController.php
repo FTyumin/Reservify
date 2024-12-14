@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Guest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -15,9 +16,8 @@ class UserController extends Controller
 
 
     public function edit($id) {
-        $user = User::findOrFail($id);
-        $name = $user->name;
-        return view('users.edit', ['user' => $user,'name' =>$name ]);
+        $guest = Guest::findOrFail($id);
+        return view('users.edit', compact('guest'));
     }
 
     public function update(Request $request, $id) {
