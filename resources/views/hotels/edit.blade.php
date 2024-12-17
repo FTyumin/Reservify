@@ -18,7 +18,6 @@
     <form action="{{ route('hotels.update', $hotel) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         @method('PATCH')
-
         <div>
             <label for="name" class="block text-sm font-medium text-gray-700">@lang('messages.hotel_name'):</label>
             <input type="text" name="name" id="name" value="{{ $hotel->name }}" required

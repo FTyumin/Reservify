@@ -61,46 +61,42 @@ class GuestController extends Controller
 
     public function edit($id)
     {
-        $guest = Guest::findOrFail($id);
-        return view('guests.edit', compact('guest'));
+        $data = Guest::findorFail($id);
+        return view('guests.edit',['guest' => $data]);
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        // dd('Form Submitted!', $request->all());
+
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id . '|unique:guests,email,' . $id,
+            'email' => 'required|email|max:100',
             'phone_number' => 'required|string|max:20',
-            'credit_card_number' => 'required|string|max:20',
-            'password' => 'nullable|string|min:8|confirmed', // Add a password field
+            'credit_card' => 'required|string|max:20',
         ]);
-
+    
+        // // Find the guest
         $guest = Guest::findOrFail($id);
-
-        // Update Guest details
-        $guest->update([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'credit_card_number' => $request->credit_card_number,
-        ]);
+    
+        // // Update the guest details
+        $guest->update($validated);
 
         // Update the corresponding User's details
-        $guest->user->update([
-            'name' => $request->name,
-            'email' => $request->email,
-        ]);
+        // $guest->user->update([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        // ]);
 
         // Update User password if provided
-        if ($request->filled('password')) {
-            $guest->user->update([
-                'password' => Hash::make($request->password),
-            ]);
-        }
+        // if ($request->filled('password')) {
+        //     $guest->user->update([
+        //         'password' => Hash::make($request->password),
+        //     ]);
+        // }
 
-        return redirect()->route('guests.index')->with('success', 'Guest updated successfully.');
+        return redirect()->route('admin.dashboard')->with('success', 'Guest updated successfully.');
     }
 
     public function destroy($id)

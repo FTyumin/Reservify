@@ -14,6 +14,7 @@ use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\CleaningScheduleController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GuestController;
 
 Route::get('/', [HotelController::class, 'index'])->name('hotels.index');
 Route::get('/', [HotelController::class, 'index'])->name('/home');
@@ -32,6 +33,11 @@ Route::get('/hotels', function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::get('/users/{user}/delete', [UserController::class, 'delete'])->name('users.destroy');
+    Route::patch('/users/{user}', [UserController::class, 'update'])->name('users.update');
+
+    Route::resource('guests', GuestController::class);
+
+
 // });
 
 

@@ -16,14 +16,23 @@ class UserController extends Controller
 
 
     public function edit($id) {
-        $guest = Guest::findOrFail($id);
-        return view('users.edit', compact('guest'));
+        $data = User::findOrFail($id);
+        return view('users.edit',['user'=>$data]);
     }
 
-    public function update(Request $request, $id) {
-        $user = User::findOrFail($id);
-        $user->update($request->all());
-        return redirect()->route('users.index')->with('success','User updated successfully');
+    public function update(Request $request, User $user) {
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+        ]);
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+        
+        return redirect()->route('admin.dashboard')->with('success','User updated successfully');
     }
 
     public function destroy($id)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Guest;
 
 class AdminController extends Controller
 {
@@ -12,8 +13,9 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        // Return the admin dashboard view 
-        $users = User::all();
-        return view('admin.dashboard')->with('users',$users);
+        $users = User::whereIn('role',['admin', 'employee'])->get();
+
+        $guests = Guest::all();
+        return view('admin.dashboard')->with('users',$users)->with('guests',$guests);
     }
 }
