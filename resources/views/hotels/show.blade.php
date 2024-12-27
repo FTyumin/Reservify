@@ -61,7 +61,7 @@
             @endforeach
         </div>
 
-        <h2 class="text-2xl font-semibold mb-4">@lang('messages.services')</h2>
+        {{-- <h2 class="text-2xl font-semibold mb-4">@lang('messages.services')</h2>
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             @foreach ($hotel->services as $service)
                 <div class="bg-white rounded-lg shadow overflow-hidden">
@@ -74,7 +74,7 @@
                     </div>
                 </div>
             @endforeach
-        </div>
+        </div> --}}
 
         @if(auth()->check() && auth()->user()->hasRole('admin'))
             <a href="{{ route('rooms.create', ['hotel' => $hotel->id]) }}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

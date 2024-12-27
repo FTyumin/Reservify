@@ -1,8 +1,9 @@
-<nav class="bg-white shadow-lg p-4">
+<nav class="bg-white shadow-lg p-2 m-0 w-full">
   
-  <div class="container mx-auto flex justify-between items-center">
-      <a href="/" class="text-3xl text-left font-semibold ">{{ __('messages.reservify') }}</a>
-      <div class="space-x-4 flex items-center">
+  <div class="container ml-4 flex justify-between items-center w-full p-0">
+    <a href="/" class="text-3xl text-left font-semibold">{{ __('messages.reservify') }}</a>
+      <div class="space-x-4 flex items-center justify-between text-right">
+        
         @if(Auth::check())
           @if(Auth::user()->role==='admin')
                 <a href="{{ route('admin.dashboard') }}" class="text-gray-600 hover:text-gray-800"> Dashboard </a>

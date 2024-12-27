@@ -48,6 +48,7 @@ return [
     'view' => 'Просмотр',
     'payment_successful' => 'Оплата успешно проведена',
     'make_payment' => 'Оплатить',
+    'login' => 'Войти',
     'logout' => 'Выход',
     'create_payment' => 'Создать Платеж',
     'total_price' => 'Общая Сумма',

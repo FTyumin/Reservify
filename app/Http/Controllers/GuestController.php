@@ -67,7 +67,6 @@ class GuestController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd('Form Submitted!', $request->all());
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
@@ -82,19 +81,6 @@ class GuestController extends Controller
     
         // // Update the guest details
         $guest->update($validated);
-
-        // Update the corresponding User's details
-        // $guest->user->update([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        // ]);
-
-        // Update User password if provided
-        // if ($request->filled('password')) {
-        //     $guest->user->update([
-        //         'password' => Hash::make($request->password),
-        //     ]);
-        // }
 
         return redirect()->route('admin.dashboard')->with('success', 'Guest updated successfully.');
     }
